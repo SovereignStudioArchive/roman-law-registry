@@ -1,0 +1,18 @@
+# Roman Law Registry - OpSec Filter
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Development logs and environment secrets
+*.log
+.env
+.env.local
+
+# Local Editor configurations
+.vscode/
+.idea/
+
+# Temporary Archive Files
+*.tmp
+*.bak
