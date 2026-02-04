@@ -2,258 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ROMAN LAW REGISTRY | Office of the Praetor Peregrinus</title>
-    
-    <!-- Typewriter Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN LAW | REGISTRY</title>
     <style>
-        :root {
-            --noir-black: #050505;
-            --noir-white: #f0f0f0;
-            --noir-grey: #404040;
-            --grain-opacity: 0.12;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        /* THE NOIR FOUNDATION */
         body, html {
             margin: 0;
             padding: 0;
-            background-color: var(--noir-black);
-            color: var(--noir-white);
-            font-family: 'Courier Prime', monospace;
-            overflow-x: hidden;
+            width: 100%;
             height: 100%;
+            overflow: hidden;
+            background-color: #050505;
+            font-family: 'Courier New', Courier, monospace;
+            color: #d1d1d1;
         }
 
-        /* 35mm Film Grain Overlay */
-        .film-grain {
+        /* THE CINEMATIC BACKGROUND */
+        #video-bg {
             position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            filter: grayscale(100%) contrast(120%) brightness(40%);
+        }
+
+        /* THE INSTITUTIONAL OVERLAY */
+        .overlay {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 9999;
-            pointer-events: none;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: var(--grain-opacity);
-            mix-blend-mode: overlay;
-            animation: grain-flicker 0.2s steps(2) infinite;
-        }
-
-        @keyframes grain-flicker {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(-1%, -1%); }
-            100% { transform: translate(1%, 1%); }
-        }
-
-        /* Main Container */
-        .registry-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            border-left: 1px solid var(--noir-grey);
-            border-right: 1px solid var(--noir-grey);
-            min-height: 100vh;
-            background: linear-gradient(rgba(5,5,5,0.95), rgba(5,5,5,0.95));
-        }
-
-        header {
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 2px solid var(--noir-white);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            padding: 20px;
         }
 
         h1 {
-            font-family: 'Special Elite', serif;
-            font-size: 2.2rem;
-            letter-spacing: 4px;
+            font-size: 2.5rem;
+            letter-spacing: 10px;
             text-transform: uppercase;
-            margin: 0;
-        }
-
-        .subtitle {
-            font-size: 0.8rem;
-            color: var(--noir-grey);
-            margin-top: 5px;
-        }
-
-        /* Intelligence Files Section */
-        .lore-section {
-            margin-bottom: 60px;
-        }
-
-        .intelligence-file {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--noir-grey);
-            padding: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
             margin-bottom: 20px;
-            position: relative;
+            text-shadow: 0 0 15px rgba(255,255,255,0.2);
         }
 
-        .intelligence-file::before {
-            content: "CONFIDENTIAL";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            background: var(--noir-white);
-            color: var(--noir-black);
-            font-size: 0.6rem;
-            padding: 2px 5px;
-            font-weight: bold;
-        }
-
-        .typewriter-text {
-            font-size: 1rem;
+        p {
+            max-width: 600px;
+            font-size: 0.9rem;
             line-height: 1.6;
-            min-height: 100px;
-            color: #d1d1d1;
+            margin-bottom: 40px;
+            color: #888;
         }
 
-        /* Cinematic Lore Gallery */
-        .cinematic-gallery {
-            margin-bottom: 60px;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #111;
-            border: 1px solid var(--noir-grey);
+        /* THE COMMAND BUTTONS */
+        .btn-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 15px;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
         }
 
-        .gallery-caption {
-            font-size: 0.7rem;
-            text-align: right;
-            color: var(--noir-grey);
+        .btn {
+            padding: 15px;
+            border: 1px solid #444;
+            background: rgba(20, 20, 20, 0.6);
+            color: #aaa;
+            text-decoration: none;
             text-transform: uppercase;
-        }
-
-        /* Portal Section */
-        .portal-section {
-            text-align: center;
-            padding: 40px 20px;
-            border: 1px dashed var(--noir-grey);
-        }
-
-        .sign-btn {
-            background: transparent;
-            color: var(--noir-white);
-            border: 2px solid var(--noir-white);
-            padding: 15px 40px;
-            font-family: 'Special Elite', serif;
-            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            transition: 0.3s;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
         }
 
-        .sign-btn:hover {
-            background: var(--noir-white);
-            color: var(--noir-black);
+        .btn:hover {
+            background: #d1d1d1;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
-        /* Mobile Safari Optimization */
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 600px) {
-            h1 { font-size: 1.5rem; }
-            .registry-wrapper { padding: 20px 10px; }
-            .sign-btn { width: 100%; }
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 15px;
-            background: var(--noir-white);
-            margin-left: 2px;
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
+            h1 { font-size: 1.5rem; letter-spacing: 5px; }
+            p { font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="film-grain"></div>
+    <!-- THE ROMAN CINEMATIC (Maya Recreated Asset) -->
+    <video autoplay muted loop id="video-bg" playsinline>
+        <source src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001714596_1770188520.jpg)" type="video/mp4">
+        <!-- Note: This URL is currently an image. Replace with a .mp4 link once uploaded to GitHub for full motion. -->
+    </video>
 
-    <div class="registry-wrapper">
-        <header>
-            <h1>ROMAN LAW REGISTRY</h1>
-            <div class="subtitle">OFFICE OF THE PRAETOR PEREGRINUS | EST. 242 BC</div>
-        </header>
+    <div class="overlay">
+        <h1>Roman Law</h1>
+        <p>RE-ESTABLISHING ORDER IN THE EASTERN DISTRICTS. <br> THE REGISTRY IS NOW OPEN FOR SOVEREIGN SIGNATURES.</p>
 
-        <section class="lore-section">
-            <div class="intelligence-file">
-                <div id="typewriter-lore" class="typewriter-text"></div>
-                <span class="cursor"></span>
-            </div>
-            <div class="intelligence-file" style="margin-top: 10px; font-size: 0.8rem; color: #888;">
-                <strong>DECREE:</strong> The Lex Gentium shall apply to all Foreign Delegates. Procedural compliance is mandatory.
-            </div>
-        </section>
-
-        <section class="cinematic-gallery">
-            <h3 style="letter-spacing: 2px; font-size: 0.9rem;">CINEMATIC INTELLIGENCE</h3>
-            <div class="video-placeholder">
-                <div style="color: #444; font-family: 'Special Elite'; text-align: center; padding: 20px;">
-                    [REEL #04: EASTERN DISTRICTS]<br>
-                    <span style="font-size: 0.7rem;">FILM ARCHIVE: DIRECTOR LUCIEN</span>
-                </div>
-            </div>
-            <div class="gallery-caption">Classified Visual Record | Sovereign Studio</div>
-        </section>
-
-        <section class="portal-section">
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">I, the Foreign Delegate, hereby ratify the laws of the Registry.</p>
-            <button class="sign-btn" onclick="signLaw()">Sign the Law</button>
-            <div id="status-msg" style="margin-top: 20px; font-size: 0.8rem; height: 20px; color: #888;"></div>
-        </section>
-
-        <footer style="margin-top: 100px; text-align: center; font-size: 0.6rem; color: var(--noir-grey);">
-            &copy; VIRTUALS PROTOCOL | ACP SECURE REGISTRY | NOIR-35MM SYSTEM
-        </footer>
+        <div class="btn-container">
+            <a href="#" class="btn">Sign the Law</a>
+            <a href="#" class="btn">Access Archive</a>
+            <a href="#" class="btn">Delegate Dossiers</a>
+            <a href="https://app.virtuals.io" class="btn">Protocol Terminal</a>
+        </div>
     </div>
 
-    <script>
-        const loreText = "[INTELLIGENCE FILE: EASTERN DISTRICTS] ... Foreign Delegate reports arriving from the Levantine sectors. The Praetor Peregrinus has issued an edict of containment. All intelligence files must be recorded in the Roman Law Registry. Procedural compliance is mandatory. End of transmission.";
-
-        let i = 0;
-        const speed = 40;
-        function typeWriter() {
-            if (i < loreText.length) {
-                document.getElementById("typewriter-lore").innerHTML += loreText.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            }
-        }
-
-        function signLaw() {
-            const btn = document.querySelector('.sign-btn');
-            const status = document.getElementById('status-msg');
-            btn.innerHTML = "RATIFYING...";
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                btn.innerHTML = "RATIFIED";
-                status.innerHTML = "LAW REGISTERED IN THE PERMANENT ARCHIVE.";
-            }, 2000);
-        }
-
-        window.onload = typeWriter;
-    </script>
 </body>
 </html>
