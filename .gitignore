@@ -1,18 +1,34 @@
-# Roman Law Registry - OpSec Filter
+# --- ROMAN LAW REGISTRY OPSEC ---
 
-# OS metadata
+# Operating System Files (The Clutter)
 .DS_Store
 Thumbs.db
+*.swp
+.AppleDouble
+.LSOverride
 
-# Development logs and environment secrets
-*.log
+# Local Environment & Private Keys (The Secrets)
 .env
 .env.local
+.env.*.local
+*.pem
+*.key
 
-# Local Editor configurations
+# Temporary Logs & Debugging (The Static)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Editor Specific (The Workspace)
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
-# Temporary Archive Files
+# Archive & Distribution
+dist/
+build/
+out/
 *.tmp
-*.bak
