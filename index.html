@@ -6,7 +6,7 @@
         body { margin: 0; background: #000; font-family: monospace; color: #fff; }
         #bg { position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; z-index: -1; filter: grayscale(1); object-fit: cover; }
         .ui { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
-        .btn { display: block; padding: 15px; border: 1px solid #fff; color: #fff; text-decoration: none; margin: 10px; letter-spacing: 2px; }
+        .btn { display: block; padding: 15px; border: 1px solid #fff; color: #fff; text-decoration: none; margin: 10px; letter-spacing: 2px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -18,9 +18,18 @@
     <div class="ui">
         <h1>ROMAN LAW</h1>
         <p>REGISTRY ACTIVE</p>
-        <a href="#" class="btn">SIGN THE LAW</a>
-        <a href="#" class="btn">ARCHIVE</a>
+        <a class="btn" onclick="activate()">SIGN THE LAW</a>
+        <a class="btn" onclick="activate()">ARCHIVE</a>
     </div>
+
+    <script>
+        function activate() {
+            var v = document.getElementById("bg");
+            v.muted = false;
+            v.volume = 0.8;
+            console.log("Audio Unlocked");
+        }
+    </script>
 
 </body>
 </html>
