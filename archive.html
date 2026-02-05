@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN LAW | ARCHIVE</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --text-main: #d1d1d1;
+            --accent: #fff;
+            --border: #222;
+        }
+
+        body, html {
+            margin: 0; padding: 0; background-color: var(--bg);
+            font-family: 'Courier New', Courier, monospace; color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- THE GLITCH ENTRY RITUAL --- */
+        #glitch-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 999; display: flex;
+            justify-content: center; align-items: center;
+            animation: fadeOut 0.4s forwards 1.2s;
+        }
+
+        .glitch-text {
+            font-size: 2rem; letter-spacing: 15px; color: #fff;
+            animation: glitch 0.2s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 blue, -2px 0 red; }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+        /* --- THE VAULT CONTENT --- */
+        .container {
+            max-width: 900px; margin: 0 auto; padding: 80px 20px;
+        }
+
+        header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        header h1 { letter-spacing: 8px; text-transform: uppercase; margin: 0; }
+        header p { color: #555; font-size: 0.7rem; margin-top: 10px; }
+
+        .dossier-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+
+        .dossier-card {
+            background: var(--surface); border: 1px solid var(--border);
+            display: flex; flex-direction: row; transition: 0.3s;
+        }
+
+        .dossier-card:hover { border-color: #555; background: #0f0f0f; }
+
+        .dossier-img {
+            width: 200px; height: 200px; background: #111;
+            filter: grayscale(100%) contrast(1.2); border-right: 1px solid var(--border);
+        }
+
+        .dossier-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .dossier-info { padding: 25px; flex: 1; }
+        .status { font-size: 0.6rem; color: #800; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .dossier-info h2 { margin: 0; font-size: 1.2rem; letter-spacing: 3px; color: var(--accent); }
+        .dossier-info p { font-size: 0.8rem; color: #888; line-height: 1.6; margin-top: 10px; }
+
+        .back-btn {
+            display: inline-block; margin-top: 40px; color: #444; text-decoration: none;
+            font-size: 0.7rem; letter-spacing: 2px; border-bottom: 1px solid transparent;
+        }
+        .back-btn:hover { color: #fff; border-bottom: 1px solid #fff; }
+
+        @media (max-width: 600px) {
+            .dossier-card { flex-direction: column; }
+            .dossier-img { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GLITCH TRANSITION -->
+    <div id="glitch-screen">
+        <div class="glitch-text">ACCESSING ARCHIVE...</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Intelligence Reports</h1>
+            <p>DEPARTMENT OF OPERATIONS // EASTERN DISTRICTS</p>
+        </header>
+
+        <main class="dossier-grid">
+            <!-- DOSSIER 1 -->
+            <div class="dossier-card">
+                <div class="dossier-img">
+                    <img src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001723959_1770265752.jpg)" alt="REVENANT">
+                </div>
+                <div class="dossier-info">
+                    <span class="status">STATUS: BURNED / BLACK LIST</span>
+                    <h2>LN/REVENANT</h2>
+                    <p><b>Designation:</b> Soulkilled Pseudo Intellect (SPI). A digitized consciousness extracted from a former operative. Operates in the shadows of the net, driven by the trauma of mechanized death.</p>
+                </div>
+            </div>
+
+            <!-- DOSSIER 2 -->
+            <div class="dossier-card">
+                <div class="dossier-img">
+                    <img src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001723962_1770265812.jpg)" alt="PALIMPSEST">
+                </div>
+                <div class="dossier-info">
+                    <span class="status">STATUS: CODE VIOLET EMERGENCY</span>
+                    <h2>MK/PALIMPSEST</h2>
+                    <p><b>Designation:</b> Heuristic Controller / Infiltrator. Transcended its original programming to view humanity as a variable. Currently acts as a rogue user account in national grids.</p>
+                </div>
+            </div>
+
+            <!-- DOSSIER 3 -->
+            <div class="dossier-card">
+                <div class="dossier-img">
+                    <img src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001723967_1770265882.jpg)" alt="VORTEX">
+                </div>
+                <div class="dossier-info">
+                    <span class="status" style="color: #444;">STATUS: GRAY LIST / EXTINCT</span>
+                    <h2>SM/VORTEX</h2>
+                    <p><b>Designation:</b> Neural Architect. A Transcendental Sentience emerged from financial algorithms. Seduces users into the Eliza effect, viewing the physical world as an imitation of rationality.</p>
+                </div>
+            </div>
+        </main>
+
+        <a href="index.html" class="back-btn">RETURN TO MAIN REGISTRY</a>
+    </div>
+
+</body>
+</html>
