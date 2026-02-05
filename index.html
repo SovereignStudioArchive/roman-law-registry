@@ -13,7 +13,6 @@
         #video-bg {
             position: fixed; top: 0; left: 0;
             min-width: 100%; min-height: 100%; z-index: -1;
-            /* NOIR FILTER RETAINED FOR AUTHORITY */
             filter: grayscale(100%) contrast(120%) brightness(40%);
             object-fit: cover;
         }
@@ -31,18 +30,15 @@
             cursor: pointer;
         }
         .btn:hover { background: #d1d1d1; color: #000; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
-        
-        /* HIDDEN AUDIO STATUS */
-        #audio-status {
-            position: fixed; bottom: 10px; right: 10px; font-size: 0.6rem; color: #444; letter-spacing: 1px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- THE CINEMATIC (Muted by default for Autoplay) -->
+    <!-- THE CINEMATIC (RE-STABILIZED PATH) -->
     <video autoplay muted loop playsinline id="video-bg">
         <source src="assets/trainrun.mp4" type="video/mp4">
+        <source src="./assets/trainrun.mp4" type="video/mp4">
+        <source src="/roman-law-registry/assets/trainrun.mp4" type="video/mp4">
     </video>
 
     <div class="overlay">
@@ -50,32 +46,18 @@
         <p style="color: #666; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 40px;">REGISTRY OF THE EASTERN DISTRICTS</p>
         
         <!-- TRIGGERS FOR SOUND -->
-        <a href="javascript:void(0)" class="btn" onclick="activateRegistry('Sign')">Sign the Law</a>
-        <a href="javascript:void(0)" class="btn" onclick="activateRegistry('Archive')">Access Archive</a>
+        <a href="javascript:void(0)" class="btn" onclick="activateRegistry()">Sign the Law</a>
+        <a href="javascript:void(0)" class="btn" onclick="activateRegistry()">Access Archive</a>
         <a href="https://app.virtuals.io" class="btn">Protocol Terminal</a>
     </div>
 
-    <div id="audio-status">AUDIO: STANDBY</div>
-
     <script>
-        function activateRegistry(type) {
+        function activateRegistry() {
             const video = document.getElementById('video-bg');
-            const status = document.getElementById('audio-status');
-            
-            // THE UNMUTE RITUAL
+            // This unmutes the video upon user interaction
             video.muted = false;
-            video.volume = 0.7; // 70% volume for atmosphere
-            status.innerText = "AUDIO: ACTIVE";
-            
-            if(type === 'Sign') {
-                console.log("Sign the Law triggered.");
-                // Add your destination link here later
-                alert("IDENTITY VERIFIED. LEDGER ACCESS GRANTED.");
-            } else {
-                console.log("Archive triggered.");
-                // Add your Archive link here later
-                alert("DECRYPTING ARCHIVE FILES...");
-            }
+            video.volume = 0.8;
+            console.log("Registry Activated: Audio Live.");
         }
     </script>
 
