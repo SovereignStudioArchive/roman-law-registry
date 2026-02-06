@@ -3,116 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ROMAN LAW | GENESIS</title>
+    <title>ROMAN LAW | THE ENGINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <style>
-        /* BASE STYLING */
         body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; height: 100dvh; overflow: hidden; }
 
-        /* 1. THE GENESIS OVERLAY (Pre-Landing) */
+        /* 1. GENESIS OVERLAY */
         #genesis-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 100;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: #000; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 2s ease;
         }
 
-        .genesis-text {
-            font-size: 0.9rem; letter-spacing: 5px; color: #666;
-            text-align: center; margin-bottom: 30px; min-height: 1.5rem;
-        }
-
         .genesis-btn {
-            background: none; border: 1px solid #fff; color: #fff;
-            padding: 15px 30px; cursor: pointer; letter-spacing: 4px;
-            font-family: 'Courier New', monospace; transition: 1.5s;
-            opacity: 0; /* Hidden until typewriter finishes */
+            background: none; border: 1px solid #fff; color: #fff; padding: 15px 30px; 
+            cursor: pointer; letter-spacing: 4px; font-family: 'Courier New', monospace; 
+            transition: 1.5s; opacity: 0;
         }
 
-        .genesis-btn:hover { background: #fff; color: #000; }
-
-        /* 2. THE MAIN HUB (Landing Page) */
+        /* 2. THE FOUNDRY BACKGROUND */
         #bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            object-fit: cover; filter: grayscale(1) brightness(0.2); 
+            object-fit: cover; filter: grayscale(1) brightness(0.15); 
             background: url('assets/foundry-bg.png') no-repeat center center/cover;
         }
 
         .ui { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            text-align: center; width: 90%; max-width: 800px;
-            opacity: 0; transition: opacity 2s ease;
+            text-align: center; width: 90%; max-width: 800px; opacity: 0; transition: opacity 2s ease;
         }
 
-        h1 { font-size: 8vw; letter-spacing: 12px; margin: 0; font-weight: normal; }
-        .studio-tag { font-size: 0.7rem; letter-spacing: 5px; color: #b7410e; margin-bottom: 40px; }
+        h1 { font-size: 8vw; letter-spacing: 12px; margin: 0; color: #fff; }
 
+        /* THE MANIFESTATION ENGINE */
+        .prompt-box {
+            margin: 40px auto; width: 100%; max-width: 500px;
+            border-bottom: 1px solid #333; padding: 10px;
+            display: flex; align-items: center;
+        }
+
+        .prompt-input {
+            background: none; border: none; color: #b7410e; width: 100%;
+            font-family: 'Courier New', monospace; font-size: 1rem;
+            outline: none; letter-spacing: 2px;
+        }
+
+        /* THE REVEAL LAYER (Where the Decree Lives) */
+        #manifest-reveal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 50; display: none;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        }
+
+        .sample-img { width: 80%; max-width: 800px; border: 1px solid #b7410e; filter: grayscale(1); margin-bottom: 20px; }
+
+        /* THE SMART-ASS DECREE (jyw-text) */
+        #jyw-text {
+            font-family: 'Special Elite', cursive; color: #fff; opacity: 0; transition: 2s;
+            transform: translateY(20px);
+        }
+
+        .glitch-law {
+            color: #b7410e; font-size: 2rem; display: block; margin-top: 10px; 
+            letter-spacing: 10px; font-weight: bold; animation: law-glow 3s infinite;
+        }
+
+        @keyframes law-glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(183, 65, 14, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(183, 65, 14, 1); }
+        }
+
+        /* TABS */
         .tab-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
-
         .tab-btn { 
-            position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: space-between;
-            width: 350px; padding: 22px; border: 1px solid #333; 
+            width: 350px; padding: 20px; border: 1px solid #333; 
             color: #fff; text-decoration: none; letter-spacing: 3px; font-size: 0.8rem; background: rgba(0,0,0,0.6);
             transition: 0.4s;
         }
+        .tab-btn:hover { border-color: #b7410e; color: #b7410e; }
 
-        .tab-preview {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0; transition: 0.4s; object-fit: cover; filter: grayscale(1) brightness(0.4);
-        }
-
-        .tab-btn:hover { border-color: #b7410e; transform: scale(1.05); }
-        .tab-btn:hover .tab-preview { opacity: 1; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 14vw; letter-spacing: 5px; }
-            .tab-btn { width: 100%; }
-        }
+        @media (max-width: 600px) { h1 { font-size: 14vw; } .tab-btn { width: 100%; } }
     </style>
 </head>
 <body>
 
     <!-- 1. GENESIS OVERLAY -->
     <div id="genesis-overlay">
-        <div class="genesis-text" id="typewriter"></div>
+        <div id="typewriter" style="color: #666; letter-spacing: 5px; margin-bottom: 20px;"></div>
         <button class="genesis-btn" id="awaken-btn" onclick="revealStudio()">[ AWAKEN THE ARCHITECT ]</button>
     </div>
 
-    <!-- 2. MAIN STUDIO HUB -->
+    <!-- 2. THE MANIFESTATION REVEAL -->
+    <div id="manifest-reveal">
+        <p id="processing-text" style="letter-spacing: 10px; color: #444;">PROCESSING VISION...</p>
+        <img id="sample-output" src="![](https://images.useotto.xyz/images/1770340353209.png)" class="sample-img" style="display:none;">
+        
+        <!-- THE "SMART-ASS" DECREE -->
+        <div id="jyw-text">
+            <p style="font-size: 0.8rem; letter-spacing: 3px;">"ALWAYS REMEMBER THAT ANYTHING CAN BE CREATED INTO THIS WORLD...</p>
+            <p>
+                <span style="font-size: 1rem;">WE ARE THE </span>
+                <span class="glitch-law">LAW</span>
+                <span style="font-size: 1rem;">THAT GOVERNS THE IMAGINATION."</span>
+            </p>
+        </div>
+
+        <button onclick="closeReveal()" style="margin-top:40px; background:none; border:1px solid #fff; color:#fff; padding:10px 20px; cursor:pointer; font-family: 'Courier New', monospace;">[ RETURN TO JURISDICTION ]</button>
+    </div>
+
+    <!-- 3. MAIN STUDIO HUB -->
     <div id="bg"></div>
     <div class="ui" id="main-ui">
         <h1>ROMAN LAW</h1>
-        <p class="studio-tag">Autonomous AI Creative Studio</p>
-        
+        <p style="color:#b7410e; letter-spacing:5px; font-size:0.7rem; margin-bottom: 30px;">AUTONOMOUS CREATIVE STUDIO</p>
+
+        <div class="prompt-box">
+            <span style="color:#444; margin-right:10px;">></span>
+            <input type="text" class="prompt-input" id="user-prompt" placeholder="ENTER A VISION TO MANIFEST..." onkeydown="if(event.key==='Enter') manifest()">
+        </div>
+
         <div class="tab-container">
-            <a href="https://x.com/your_recruitment_link" target="_blank" class="tab-btn">
-                <img src="assets/foundry-bg.png" class="tab-preview">
-                <span>[ 01 ] JOIN_THE_FOUNDRY</span>
-                <span style="font-size: 0.5rem; opacity: 0.5;">Recruiting</span>
-            </a>
-            <a href="archive.html" class="tab-btn">
-                <img src="![](https://images.useotto.xyz/images/1770340353209.png)" class="tab-preview">
-                <span>[ 02 ] ACCESS_ARCHIVE</span>
-                <span style="font-size: 0.5rem; opacity: 0.5;">Evidence</span>
-            </a>
+            <a href="archive.html" class="tab-btn"><span>[ 01 ] ACCESS_ARCHIVE</span><span style="opacity:0.5; font-size:0.5rem;">Evidence</span></a>
+            <a href="https://x.com/RomanLawStudio" target="_blank" class="tab-btn"><span>[ 02 ] JOIN_THE_FOUNDRY</span><span style="opacity:0.5; font-size:0.5rem;">Recruitment</span></a>
         </div>
     </div>
 
-    <!-- 3. GENESIS LOGIC -->
     <script>
-        const narrativeText = "BUILDING WORLD THROUGH ARTIST CREATIVITY...";
-        let index = 0;
-
-        function startGenesis() {
-            const target = document.getElementById("typewriter");
-            if (index < narrativeText.length) {
-                target.innerHTML += narrativeText.charAt(index);
-                index++;
-                setTimeout(startGenesis, 80);
-            } else {
-                // Show the button once text is done
-                document.getElementById("awaken-btn").style.opacity = "1";
-            }
+        // NARRATIVE LOGIC
+        const text = "BUILDING WORLD THROUGH ARTIST CREATIVITY...";
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++; setTimeout(type, 70);
+            } else { document.getElementById("awaken-btn").style.opacity = "1"; }
         }
 
         function revealStudio() {
@@ -120,11 +145,31 @@
             setTimeout(() => {
                 document.getElementById('genesis-overlay').style.display = 'none';
                 document.getElementById('main-ui').style.opacity = '1';
-            }, 2000);
+            }, 1500);
         }
 
-        // Start the sequence on load
-        window.onload = startGenesis;
-    </script>
+        // ENGINE LOGIC
+        function manifest() {
+            const prompt = document.getElementById('user-prompt').value;
+            if(!prompt) return;
+            document.getElementById('manifest-reveal').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('processing-text').style.display = 'none';
+                document.getElementById('sample-output').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('jyw-text').style.opacity = '1';
+                    document.getElementById('jyw-text').style.transform = 'translateY(0)';
+                }, 1000);
+            }, 3000);
+        }
 
+        function closeReveal() {
+            document.getElementById('manifest-reveal').style.display = 'none';
+            document.getElementById('user-prompt').value = '';
+            document.getElementById('jyw-text').style.opacity = '0';
+        }
+
+        window.onload = type;
+    </script>
 </body>
+</html>
