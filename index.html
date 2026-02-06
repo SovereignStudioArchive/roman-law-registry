@@ -8,7 +8,7 @@
     <style>
         body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; height: 100dvh; overflow: hidden; }
 
-        /* 1. GENESIS OVERLAY (THE BLACK START) */
+        /* 1. GENESIS OVERLAY */
         #genesis-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 1000;
@@ -16,33 +16,31 @@
             transition: opacity 2s ease, visibility 2s;
         }
         
-        /* THE LARGE GLOWING ROSE */
+        /* THE TRUE ROSE SILHOUETTE */
         #rose-container {
-            width: 180px; height: 180px; margin-bottom: 40px;
+            width: 250px; height: 250px; margin-bottom: 30px;
             opacity: 0; transition: opacity 4s ease;
-            filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8));
-            animation: breathe 4s infinite ease-in-out;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.7));
+            animation: breathe 5s infinite ease-in-out;
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6)); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(255, 0, 0, 1)); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 45px rgba(255, 0, 0, 0.9)); }
         }
         
-        #typewriter { color: #666; letter-spacing: 6px; font-size: 0.85rem; margin-bottom: 40px; height: 1.2rem; }
+        #typewriter { color: #555; letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 50px; text-transform: uppercase; }
 
         .genesis-btn {
-            background: none; border: 1px solid #fff; color: #fff; padding: 15px 35px; 
-            cursor: pointer; letter-spacing: 5px; font-family: 'Courier New', monospace; 
+            background: none; border: 1px solid #fff; color: #fff; padding: 18px 40px; 
+            cursor: pointer; letter-spacing: 6px; font-family: 'Courier New', monospace; 
             transition: 1.5s; opacity: 0; visibility: hidden;
-            text-transform: uppercase;
         }
-        .genesis-btn:hover { background: #fff; color: #000; }
 
         /* 2. BACKGROUND & UI */
-        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; object-fit: cover; filter: grayscale(1) brightness(0.25); }
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; object-fit: cover; filter: grayscale(1) brightness(0.2); }
         .ui { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; max-width: 800px; opacity: 0; transition: opacity 2s ease; z-index: 10; }
-        h1 { font-size: 7vw; letter-spacing: 12px; margin: 0; font-family: 'Special Elite', cursive; color: #fff; }
+        h1 { font-size: 8vw; letter-spacing: 15px; margin: 0; font-family: 'Special Elite', cursive; }
 
         /* PROMPT & REVEAL */
         .prompt-box { margin: 40px auto; width: 100%; max-width: 600px; border-bottom: 1px solid #b7410e; padding: 15px; display: flex; align-items: center; background: rgba(0,0,0,0.6); }
@@ -50,26 +48,24 @@
         #manifest-reveal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 500; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .sample-img { width: 85%; max-width: 800px; border: 1px solid #b7410e; margin-bottom: 25px; }
         #jyw-text { font-family: 'Special Elite', cursive; opacity: 0; transition: 2s; }
-        .glitch-law { color: #b7410e; font-size: 2.2rem; display: block; letter-spacing: 10px; font-weight: bold; }
+        .glitch-law { color: #b7410e; font-size: 2.2rem; display: block; letter-spacing: 12px; font-weight: bold; }
 
         /* TABS */
         .tab-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .tab-btn { display: flex; align-items: center; justify-content: space-between; width: 380px; padding: 22px; border: 1px solid #333; color: #fff; text-decoration: none; letter-spacing: 3px; font-size: 0.8rem; background: rgba(0,0,0,0.8); transition: 0.4s; }
+        .tab-btn { display: flex; align-items: center; justify-content: space-between; width: 380px; padding: 22px; border: 1px solid #333; color: #fff; text-decoration: none; letter-spacing: 3px; font-size: 0.85rem; background: rgba(0,0,0,0.8); transition: 0.4s; }
         .tab-btn:hover { border-color: #b7410e; color: #b7410e; }
 
-        @media (max-width: 600px) { h1 { font-size: 12vw; } .tab-btn { width: 100%; } #rose-container { width: 120px; height: 120px; } }
+        @media (max-width: 600px) { h1 { font-size: 12vw; } .tab-btn { width: 100%; } #rose-container { width: 150px; height: 150px; } }
     </style>
 </head>
 <body>
 
     <!-- 1. GENESIS OVERLAY -->
     <div id="genesis-overlay">
-        <!-- LARGE SVG ROSE -->
+        <!-- TRUE ROSE SVG SILHOUETTE -->
         <div id="rose-container">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 95C50 95 20 75 20 45C20 25 35 15 50 30C65 15 80 25 80 45C80 75 50 95 50 95Z" fill="#ff0000" fill-opacity="0.8"/>
-                <path d="M50 35C45 25 30 25 25 40C20 55 35 70 50 85" stroke="#fff" stroke-width="0.5" stroke-opacity="0.3"/>
-                <path d="M50 35C55 25 70 25 75 40C80 55 65 70 50 85" stroke="#fff" stroke-width="0.5" stroke-opacity="0.3"/>
+            <svg viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12,2C10.11,2,8.42,2.83,7.25,4.14C6.08,2.83,4.39,2,2.5,2C2.22,2,2,2.22,2,2.5V3C2,4.66,3.34,6,5,6C5.55,6,6,5.55,6,5C6,4.45,5.55,4,5,4C4.45,4,4,3.55,4,3C4,2.45,4.45,2,5,2C6.11,2,7,2.89,7,4C7,5.11,6.11,6,5,6C4.17,6,3.46,6.5,3.14,7.22C4.19,8.43,5.74,9.2,7.5,9.2C8.33,9.2,9.11,9,9.81,8.65C10.45,10.05,11.5,11.2,12.86,11.83C12.31,12.5,12,13.34,12,14.25V21C12,21.55,12.45,22,13,22H14C14.55,22,15,21.55,15,21V15C15,14.45,14.55,14,14,14H13V12.92C14.15,12.55,15.11,11.83,15.82,10.89C16.53,11.83,17.49,12.55,18.64,12.92V14H17.64C17.09,14,16.64,14.45,16.64,15V21C16.64,21.55,17.09,22,17.64,22H18.64C19.19,22,19.64,21.55,19.64,21V14.25C19.64,13.34,19.33,12.5,18.78,11.83C20.14,11.2,21.19,10.05,21.83,8.65C22.53,9,23.31,9.2,24.14,9.2C25.9,9.2,27.45,8.43,28.5,7.22C28.18,6.5,27.47,6,26.64,6C25.53,6,24.64,5.11,24.64,4C24.64,2.89,25.53,2,26.64,2C27.19,2,27.64,2.45,27.64,3C27.64,3.55,27.19,4,26.64,4C26.09,4,25.64,4.45,25.64,5C25.64,5.55,26.09,6,26.64,6C28.3,6,29.64,4.66,29.64,3V2.5C29.64,2.22,29.42,2,29.14,2C27.25,2,25.56,2.83,24.39,4.14C23.22,2.83,21.53,2,19.64,2V2Z"/>
             </svg>
         </div>
         <div id="typewriter"></div>
@@ -120,7 +116,7 @@
                 setTimeout(() => {
                     btn.style.visibility = "visible";
                     btn.style.opacity = "1";
-                }, 1000);
+                }, 1500);
             }
         }
 
