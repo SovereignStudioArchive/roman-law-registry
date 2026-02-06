@@ -8,39 +8,38 @@
     <style>
         body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; height: 100dvh; overflow: hidden; }
 
-        /* 1. GENESIS OVERLAY */
+        /* 1. GENESIS OVERLAY (THE BLACK START) */
         #genesis-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 2s ease;
+            background: #000; z-index: 1000; /* Must be highest */
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 2s ease, visibility 2s;
         }
         
         #typewriter-container { display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
-        
         #typewriter { color: #666; letter-spacing: 5px; font-size: 0.9rem; }
-
-        #rose-icon { 
-            opacity: 0; transition: opacity 3s ease; font-size: 1.5rem; margin-left: 15px;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)); 
-        }
+        #rose-icon { opacity: 0; transition: opacity 3s ease; font-size: 1.5rem; margin-left: 15px; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)); }
 
         .genesis-btn {
             background: none; border: 1px solid #fff; color: #fff; padding: 15px 30px; 
-            cursor: pointer; letter-spacing: 4px; font-family: 'Courier New', monospace; transition: 1.5s; opacity: 0;
+            cursor: pointer; letter-spacing: 4px; font-family: 'Courier New', monospace; 
+            transition: 1.5s; opacity: 0; visibility: hidden;
         }
 
-        /* 2. THE VELOCITY BACKGROUND (Landing Page) */
-        #bg { 
+        /* 2. THE BACKGROUND VIDEO (THE HUB) */
+        #bg-video { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            object-fit: cover; filter: grayscale(1) brightness(0.2); 
+            object-fit: cover; filter: grayscale(1) brightness(0.25); 
         }
 
+        /* 3. THE HUB UI */
         .ui { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            text-align: center; width: 90%; max-width: 800px; opacity: 0; transition: opacity 2s ease;
+            text-align: center; width: 90%; max-width: 800px; 
+            opacity: 0; transition: opacity 2s ease; z-index: 10;
         }
 
-        h1 { font-size: 8vw; letter-spacing: 12px; margin: 0; text-shadow: 0 0 20px rgba(183, 65, 14, 0.4); }
+        h1 { font-size: 8vw; letter-spacing: 12px; margin: 0; text-shadow: 0 0 20px rgba(183, 65, 14, 0.4); font-family: 'Special Elite', cursive; }
 
         /* THE MANIFESTATION ENGINE */
         .prompt-box {
@@ -50,18 +49,16 @@
         }
         .prompt-input {
             background: none; border: none; color: #b7410e; width: 100%;
-            font-family: 'Courier New', monospace; font-size: 1.1rem;
-            outline: none; letter-spacing: 2px;
+            font-family: 'Courier New', monospace; font-size: 1.1rem; outline: none; letter-spacing: 2px;
         }
 
         /* THE REVEAL LAYER */
         #manifest-reveal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-            z-index: 50; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            z-index: 500; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
         .sample-img { width: 85%; max-width: 800px; border: 1px solid #b7410e; filter: grayscale(1); margin-bottom: 25px; }
-
         #jyw-text { font-family: 'Special Elite', cursive; opacity: 0; transition: 2s; transform: translateY(20px); }
         .glitch-law { color: #b7410e; font-size: 2.2rem; display: block; letter-spacing: 12px; font-weight: bold; animation: law-glow 3s infinite; }
 
@@ -71,9 +68,8 @@
         .tab-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .tab-btn { 
             display: flex; align-items: center; justify-content: space-between;
-            width: 380px; padding: 22px; border: 1px solid #333; 
-            color: #fff; text-decoration: none; letter-spacing: 3px; font-size: 0.85rem; background: rgba(0,0,0,0.8);
-            transition: 0.4s;
+            width: 380px; padding: 22px; border: 1px solid #333; color: #fff; 
+            text-decoration: none; letter-spacing: 3px; font-size: 0.85rem; background: rgba(0,0,0,0.8); transition: 0.4s;
         }
         .tab-btn:hover { border-color: #b7410e; color: #b7410e; transform: scale(1.02); }
 
@@ -82,7 +78,7 @@
 </head>
 <body>
 
-    <!-- 1. GENESIS OVERLAY (The Rose Intro) -->
+    <!-- 1. GENESIS OVERLAY -->
     <div id="genesis-overlay">
         <div id="typewriter-container">
             <div id="typewriter"></div>
@@ -91,8 +87,8 @@
         <button class="genesis-btn" id="awaken-btn" onclick="revealStudio()">[ AWAKEN THE ARCHITECT ]</button>
     </div>
 
-    <!-- 2. THE VELOCITY BACKGROUND (Running Video) -->
-    <video autoplay muted loop playsinline id="bg">
+    <!-- 2. THE BACKGROUND VIDEO -->
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="assets/trainrun.mp4" type="video/mp4">
     </video>
 
@@ -100,31 +96,24 @@
     <div id="manifest-reveal">
         <p id="processing-text" style="letter-spacing: 12px; color: #b7410e; animation: pulse 1s infinite;">EXTRACTING FROM YOUR EYES...</p>
         <img id="sample-output" src="![](https://images.useotto.xyz/images/1770340353209.png)" class="sample-img" style="display:none;">
-        
         <div id="jyw-text">
             <p style="font-size: 0.8rem; letter-spacing: 3px;">"ALWAYS REMEMBER THAT ANYTHING CAN BE CREATED INTO THIS WORLD...</p>
-            <p>
-                <span style="font-size: 1rem;">WE ARE THE </span>
-                <span class="glitch-law">LAW</span>
-                <span style="font-size: 1rem;">THAT GOVERNS THE IMAGINATION."</span>
-            </p>
+            <p><span style="font-size: 1rem;">WE ARE THE </span><span class="glitch-law">LAW</span><span style="font-size: 1rem;">THAT GOVERNS THE IMAGINATION."</span></p>
         </div>
         <button onclick="closeReveal()" style="margin-top:40px; background:none; border:1px solid #fff; color:#fff; padding:12px 30px; cursor:pointer; font-family: 'Courier New', monospace;">[ RETURN TO JURISDICTION ]</button>
     </div>
 
     <!-- 4. HUB UI -->
     <div class="ui" id="main-ui">
-        <h1 class="special-elite">ROMAN LAW</h1>
+        <h1>ROMAN LAW</h1>
         <p style="color:#b7410e; letter-spacing:6px; font-size:0.75rem; margin-bottom: 40px;">SOVEREIGN CREATIVE STUDIO</p>
-
         <div class="prompt-box">
             <span style="color:#444; margin-right:15px;">></span>
             <input type="text" class="prompt-input" id="user-prompt" placeholder="ENTER A VISION TO MANIFEST..." onkeydown="if(event.key==='Enter') manifest()">
         </div>
-
         <div class="tab-container">
             <a href="archive.html" class="tab-btn"><span>[ 01 ] ACCESS_ARCHIVE</span><span style="opacity:0.5; font-size:0.55rem;">The Source</span></a>
-            <a href="https://x.com/YourRecruitmentThread" target="_blank" class="tab-btn"><span>[ 02 ] JOIN_THE_COLOSSEUM</span><span style="opacity:0.5; font-size:0.55rem;">Recruiting Architects</span></a>
+            <a href="https://x.com/YourRecruitmentThread" target="_blank" class="tab-btn"><span>[ 02 ] JOIN_THE_COLOSSEUM</span><span style="opacity:0.5; font-size:0.55rem;">Recruitment</span></a>
         </div>
     </div>
 
@@ -137,18 +126,20 @@
                 document.getElementById("typewriter").innerHTML += text.charAt(i);
                 i++; setTimeout(type, 90);
             } else { 
-                // Reveal the Rose and the Button once text is done
-                document.getElementById("awaken-btn").style.opacity = "1";
+                const btn = document.getElementById("awaken-btn");
+                btn.style.visibility = "visible";
+                btn.style.opacity = "1";
                 document.getElementById("rose-icon").style.opacity = "1";
             }
         }
 
         function revealStudio() {
-            document.getElementById('genesis-overlay').style.opacity = '0';
+            const overlay = document.getElementById('genesis-overlay');
+            overlay.style.opacity = '0';
             setTimeout(() => {
-                document.getElementById('genesis-overlay').style.display = 'none';
+                overlay.style.visibility = 'hidden';
                 document.getElementById('main-ui').style.opacity = '1';
-            }, 1500);
+            }, 2000);
         }
 
         function manifest() {
@@ -170,3 +161,7 @@
             document.getElementById('jyw-text').style.opacity = '0';
         }
 
+        window.onload = type;
+    </script>
+</body>
+</html>
