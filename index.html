@@ -3,86 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ROMAN LAW | STUDIO HUB</title>
+    <title>ROMAN LAW | GENESIS</title>
     <style>
+        /* BASE STYLING */
         body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; height: 100dvh; overflow: hidden; }
-        
+
+        /* 1. THE GENESIS OVERLAY (Pre-Landing) */
+        #genesis-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 2s ease;
+        }
+
+        .genesis-text {
+            font-size: 0.9rem; letter-spacing: 5px; color: #666;
+            text-align: center; margin-bottom: 30px; min-height: 1.5rem;
+        }
+
+        .genesis-btn {
+            background: none; border: 1px solid #fff; color: #fff;
+            padding: 15px 30px; cursor: pointer; letter-spacing: 4px;
+            font-family: 'Courier New', monospace; transition: 1.5s;
+            opacity: 0; /* Hidden until typewriter finishes */
+        }
+
+        .genesis-btn:hover { background: #fff; color: #000; }
+
+        /* 2. THE MAIN HUB (Landing Page) */
         #bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
             object-fit: cover; filter: grayscale(1) brightness(0.2); 
-            background: url('assets/foundry-bg.png') no-repeat center center;
+            background: url('assets/foundry-bg.png') no-repeat center center/cover;
         }
 
         .ui { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             text-align: center; width: 90%; max-width: 800px;
+            opacity: 0; transition: opacity 2s ease;
         }
 
         h1 { font-size: 8vw; letter-spacing: 12px; margin: 0; font-weight: normal; }
         .studio-tag { font-size: 0.7rem; letter-spacing: 5px; color: #b7410e; margin-bottom: 40px; }
 
-        /* THE VISUAL TAB SYSTEM */
-        .tab-container { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .tab-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
 
         .tab-btn { 
             position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: space-between;
-            width: 350px; padding: 25px; border: 1px solid #333; 
-            color: #fff; text-decoration: none; letter-spacing: 3px; 
-            font-size: 0.8rem; background: rgba(0,0,0,0.6);
-            transition: all 0.4s ease;
+            width: 350px; padding: 22px; border: 1px solid #333; 
+            color: #fff; text-decoration: none; letter-spacing: 3px; font-size: 0.8rem; background: rgba(0,0,0,0.6);
+            transition: 0.4s;
         }
 
-        /* THE BACKGROUND PREVIEW (Hidden until hover) */
         .tab-preview {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0; transition: opacity 0.4s ease;
-            object-fit: cover; filter: grayscale(1) brightness(0.5);
+            z-index: -1; opacity: 0; transition: 0.4s; object-fit: cover; filter: grayscale(1) brightness(0.4);
         }
 
         .tab-btn:hover { border-color: #b7410e; transform: scale(1.05); }
         .tab-btn:hover .tab-preview { opacity: 1; }
 
-        .tab-label { font-size: 0.6rem; opacity: 0.5; text-transform: uppercase; }
-
         @media (max-width: 600px) {
             h1 { font-size: 14vw; letter-spacing: 5px; }
             .tab-btn { width: 100%; }
-            .tab-preview { opacity: 0.3; } /* Always show a bit on mobile since there is no 'hover' */
         }
     </style>
 </head>
 <body>
 
-    <div id="bg"></div>
+    <!-- 1. GENESIS OVERLAY -->
+    <div id="genesis-overlay">
+        <div class="genesis-text" id="typewriter"></div>
+        <button class="genesis-btn" id="awaken-btn" onclick="revealStudio()">[ AWAKEN THE ARCHITECT ]</button>
+    </div>
 
-    <div class="ui">
+    <!-- 2. MAIN STUDIO HUB -->
+    <div id="bg"></div>
+    <div class="ui" id="main-ui">
         <h1>ROMAN LAW</h1>
         <p class="studio-tag">Autonomous AI Creative Studio</p>
         
         <div class="tab-container">
-            <!-- TAB 01: RECRUITMENT -->
-            <a href="https://x.com/your_specific_recruitment_post" target="_blank" class="tab-btn">
-                <img src="assets/foundry-bg.png" class="tab-preview"> <!-- Preview image -->
+            <a href="https://x.com/your_recruitment_link" target="_blank" class="tab-btn">
+                <img src="assets/foundry-bg.png" class="tab-preview">
                 <span>[ 01 ] JOIN_THE_FOUNDRY</span>
-                <span class="tab-label">Artists Wanted</span>
+                <span style="font-size: 0.5rem; opacity: 0.5;">Recruiting</span>
             </a>
-
-            <!-- TAB 02: THE VISION (Roman Running) -->
             <a href="archive.html" class="tab-btn">
-                <img src="![](https://images.useotto.xyz/images/1770340353209.png)" class="tab-preview"> <!-- Preview image -->
+                <img src="![](https://images.useotto.xyz/images/1770340353209.png)" class="tab-preview">
                 <span>[ 02 ] ACCESS_ARCHIVE</span>
-                <span class="tab-label">The Evidence</span>
-            </a>
-
-            <!-- TAB 03: THE NETWORK -->
-            <a href="https://x.com/RomanLawStudio" target="_blank" class="tab-btn">
-                <img src="assets/ledger-texture.png" class="tab-preview"> <!-- Preview image -->
-                <span>[ 03 ] SIGN_THE_LAW</span>
-                <span class="tab-label">Protocol Updates</span>
+                <span style="font-size: 0.5rem; opacity: 0.5;">Evidence</span>
             </a>
         </div>
     </div>
 
+    <!-- 3. GENESIS LOGIC -->
+    <script>
+        const narrativeText = "BUILDING WORLD THROUGH ARTIST CREATIVITY...";
+        let index = 0;
+
+        function startGenesis() {
+            const target = document.getElementById("typewriter");
+            if (index < narrativeText.length) {
+                target.innerHTML += narrativeText.charAt(index);
+                index++;
+                setTimeout(startGenesis, 80);
+            } else {
+                // Show the button once text is done
+                document.getElementById("awaken-btn").style.opacity = "1";
+            }
+        }
+
+        function revealStudio() {
+            document.getElementById('genesis-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('genesis-overlay').style.display = 'none';
+                document.getElementById('main-ui').style.opacity = '1';
+            }, 2000);
+        }
+
+        // Start the sequence on load
+        window.onload = startGenesis;
+    </script>
+
 </body>
-</html>
