@@ -4,48 +4,52 @@
     <meta charset="UTF-8">
     <title>Roman Law - Genesis</title>
     <style>
-        /* Force a dark grey background so we can see the video edges */
-        body { margin: 0; background-color: #222; overflow: hidden; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; font-family: 'Courier New', Courier, monospace; }
+        #video-bg { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: -1; }
         
-        #video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover; /* This ensures it fills the screen */
-            z-index: 999; /* Force to the absolute front */
-            display: block;
+        /* Subtle Sound Prompt */
+        #sound-prompt {
+            position: fixed; top: 20px; right: 20px;
+            color: rgba(255,255,255,0.4); font-size: 10px;
+            letter-spacing: 2px; text-transform: uppercase;
+            z-index: 100; cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px;
+            transition: 0.3s;
         }
+        #sound-prompt:hover { color: #fff; border-color: #fff; }
 
-        .btn-overlay {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000; /* Must be higher than the video */
-        }
-
-        button {
-            padding: 20px 50px;
-            background: white;
-            color: black;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+        .ui { position: fixed; bottom: 50px; width: 100%; text-align: center; z-index: 10; }
+        button { background: none; border: 1px solid white; color: white; padding: 15px 30px; cursor: pointer; text-transform: uppercase; letter-spacing: 5px; }
     </style>
 </head>
-<body>
+<body onclick="unlockAudio()">
 
-    <video id="video-bg" autoplay muted loop playsinline>
+    <!-- Note: We removed 'muted' so JS can take control -->
+    <video id="video-bg" loop playsinline autoplay muted>
         <source src="assets/britishroman.mp4" type="video/mp4">
     </video>
 
-    <div class="btn-overlay">
-        <button onclick="window.location.href='evolution.html'">Proceed to Evolution</button>
+    <div id="sound-prompt">Initialize Soundscape</div>
+
+    <div class="ui">
+        <button onclick="window.location.href='evolution.html'">Proceed</button>
     </div>
 
+    <script>
+        const v = document.getElementById('video-bg');
+        const prompt = document.getElementById('sound-prompt');
+
+        function unlockAudio() {
+            v.muted = false; // The Handshake
+            v.volume = 0.8;
+            prompt.innerHTML = "Audio Active";
+            prompt.style.opacity = "0.2";
+            console.log("Genesis Soundscape Unlocked.");
+        }
+
+        // Also unlock if they just hit Proceed
+        document.querySelector('button').addEventListener('click', unlockAudio);
+    </script>
 </body>
 </html>
+
