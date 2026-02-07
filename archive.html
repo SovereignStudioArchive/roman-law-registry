@@ -2,157 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Registry | Roman Law Sovereign Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN LAW | ARCHIVE</title>
     <style>
-        :root {
-            --charcoal-darkest: #0a0a0a;
-            --accent-rust: #b7410e;
-            --text-primary: #e0e0e0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--charcoal-darkest);
-            color: var(--text-primary);
-            font-family: 'Roboto Condensed', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* 1. HERO FIX: ROMAN RUNNING (MOBILE ARMORED) */
-        .hero-cinematic {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: black;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* FIXES THE ZOOM ISSUE */
-            z-index: 1;
-            filter: brightness(0.7);
-        }
-
-        .hero-overlay {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .hero-overlay h1 {
-            font-family: 'Special Elite', cursive;
-            font-size: 10vw; /* Responsive scaling */
-            letter-spacing: 10px;
-            color: white;
-            text-shadow: 0 0 20px rgba(0,0,0,1);
-        }
-
-        /* 2. THE ARCHIVE SECTION (YOUR ORIGINAL "STUFF") */
-        .archive-container {
-            padding: 5rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .archive-header {
-            border-left: 4px solid var(--accent-rust);
-            padding-left: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .archive-header h2 {
-            font-family: 'Special Elite', cursive;
-            font-size: 2rem;
-        }
-
-        /* THE LEDGER GRID */
-        .ledger-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .ledger-item {
-            background: #161616;
-            border: 1px solid #333;
-            padding: 20px;
-            transition: 0.3s;
-        }
-
-        .ledger-item:hover {
-            border-color: var(--accent-rust);
-        }
-
-        .asset-preview {
-            width: 100%;
-            height: 200px;
-            background: #000;
-            margin-bottom: 1rem;
-            object-fit: cover;
-        }
-
-        /* MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            .hero-overlay h1 { font-size: 14vw; letter-spacing: 5px; }
-            .ledger-grid { grid-template-columns: 1fr; }
-        }
+        body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; text-align: center; padding: 50px 20px; }
+        h2 { letter-spacing: 10px; border-bottom: 1px solid #b7410e; display: inline-block; padding-bottom: 10px; margin-bottom: 50px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .card { border: 1px solid #222; padding: 20px; background: #050505; transition: 0.3s; }
+        .card:hover { border-color: #b7410e; }
+        .back-btn { margin-top: 50px; display: inline-block; color: #666; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
-
-    <!-- SECTION 1: THE HERO (ROMAN RUNNING) -->
-    <section class="hero-cinematic">
-        <video autoplay muted loop playsinline class="hero-video">
-            <!-- LINK YOUR ASSET BELOW -->
-            <source src="assets/trainrun.mp4" type="video/mp4">
-        </video>
-        
-        <div class="hero-overlay">
-            <h1>ROMAN LAW</h1>
-        </div>
-    </section>
-
-    <!-- SECTION 2: THE ARCHIVE (RE-LINKED ASSETS) -->
-    <div class="archive-container">
-        <header class="archive-header">
-            <h2>SOVEREIGN_ARCHIVE</h2>
-            <p>Declassified Manifestations</p>
-        </header>
-
-        <main class="ledger-grid">
-            
-            <!-- RE-LINK YOUR ASSET 1 -->
-            <div class="ledger-item">
-                <img src="assets/evidence1.png" alt="Evidence 01" class="asset-preview">
-                <h3 style="font-family:'Special Elite';">FILE_01: THE_FOUNDRY</h3>
-                <p style="color:var(--accent-rust); font-size: 0.8rem;">STATUS: VERIFIED</p>
-            </div>
-
-            <!-- RE-LINK YOUR ASSET 2 -->
-            <div class="ledger-item">
-                <img src="assets/evidence2.png" alt="Evidence 02" class="asset-preview">
-                <h3 style="font-family:'Special Elite';">FILE_02: THE_MANIFESTO</h3>
-                <p style="color:var(--accent-rust); font-size: 0.8rem;">STATUS: VERIFIED</p>
-            </div>
-
-            <!-- Add more ledger-items as needed, pulling from your assets folder -->
-
-        </main>
+    <h2>THE REGISTRY</h2>
+    <div class="grid">
+        <div class="card"><h3>[ 01 ] CAESAR_DATA</h3><p style="font-size: 0.7rem; color: #666;">Pending Alpha Extraction...</p></div>
+        <div class="card"><h3>[ 02 ] OTTO_BRIEF</h3><p style="font-size: 0.7rem; color: #666;">Awaiting Market Pulse...</p></div>
+        <div class="card"><h3>[ 03 ] MAYA_VISUAL</h3><p style="font-size: 0.7rem; color: #666;">Rendering Sovereign Video...</p></div>
+        <div class="card"><h3>[ 04 ] MYSTERY_A</h3><p style="font-size: 0.7rem; color: #666;">[ REDACTED ]</p></div>
+        <div class="card"><h3>[ 05 ] MYSTERY_B</h3><p style="font-size: 0.7rem; color: #666;">[ REDACTED ]</p></div>
     </div>
-
+    <a href="index.html" class="back-btn">[ RETURN TO HUB ]</a>
 </body>
 </html>
+
+
