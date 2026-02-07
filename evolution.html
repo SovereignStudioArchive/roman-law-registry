@@ -7,20 +7,20 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
         .video-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        video { width: 100%; height: 100%; object-fit: cover; }
         .ui-tab { position: fixed; bottom: 0; width: 100%; height: 120px; display: flex; justify-content: center; align-items: center; z-index: 10; background: rgba(0,0,0,0.5); }
         button { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px 40px; text-transform: uppercase; letter-spacing: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="video-wrapper">
-        <video id="v" autoplay muted loop playsinline preload="auto">
-            <source src="![](https://drzuelosizfllruocmly.supabase.co/storage/v1/object/public/videos/sora/video_6986f09fdf608198863956f5dbbb634a0d7b9c31b8fee7e2.mp4?)" type="video/mp4">
+        <video autoplay muted loop playsinline id="v">
+            <!-- ADJUST FILENAME BELOW TO MATCH YOUR RUNNING VIDEO FILE NAME IN THE ASSETS FOLDER -->
+            <source src="assets/trainrun.mp4" type="video/mp4">
         </video>
     </div>
     <div class="ui-tab">
         <button disabled>Advancing to Chicago...</button>
     </div>
-    <script>document.body.addEventListener('click', function() { document.getElementById('v').play(); });</script>
 </body>
 </html>
