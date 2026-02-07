@@ -8,15 +8,15 @@
     <style>
         body { margin: 0; background: #000; font-family: 'Courier New', monospace; color: #fff; height: 100dvh; overflow: hidden; }
 
-        /* FULL SCREEN VELOCITY */
+        /* FULL COLOR & VELOCITY */
         #bg-video { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            object-fit: cover; filter: grayscale(1) brightness(0.4); 
+            object-fit: cover; filter: brightness(0.6); /* Removed Grayscale for full color */
         }
 
         /* MINIMALIST OVERLAY */
         .header { position: absolute; top: 40px; left: 40px; z-index: 10; }
-        h1 { font-size: 3rem; letter-spacing: 15px; margin: 0; font-family: 'Special Elite', cursive; opacity: 0.8; }
+        h1 { font-size: 3rem; letter-spacing: 15px; margin: 0; font-family: 'Special Elite', cursive; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); }
         .subtitle { color: #b7410e; letter-spacing: 6px; font-size: 0.7rem; text-transform: uppercase; margin-top: 5px; }
 
         /* GHOST NAVIGATION */
@@ -24,26 +24,50 @@
             position: absolute; bottom: 40px; right: 40px; z-index: 10;
             color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 4px;
             border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px;
-            transition: 0.4s; opacity: 0.5;
+            transition: 0.4s; opacity: 0.6;
         }
         .nav-link:hover { opacity: 1; border-color: #b7410e; color: #b7410e; }
 
-        @media (max-width: 600px) { h1 { font-size: 1.8rem; } .nav-link { right: 20px; bottom: 20px; } }
+        /* AUDIO UNMUTE OVERLAY (For browser compliance) */
+        #audio-trigger {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 100;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 1s;
+        }
+        #audio-trigger span { border: 1px solid #fff; padding: 15px 30px; letter-spacing: 5px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <video autoplay muted loop playsinline id="bg-video">
+    <!-- UNMUTED VIDEO -->
+    <video loop playsinline id="bg-video">
         <source src="assets/trainrun.mp4" type="video/mp4">
     </video>
+
+    <!-- INITIAL INTERACTION FOR SOUND -->
+    <div id="audio-trigger" onclick="enableAudio()">
+        <span>[ INITIALIZE SENSORY INPUT ]</span>
+    </div>
 
     <div class="header">
         <h1>ROMAN LAW</h1>
         <div class="subtitle">Sovereign Creative Studio</div>
     </div>
 
-    <!-- CLEAN GHOST NAVIGATION -->
     <a href="archive.html" class="nav-link">[ ENTER_ARCHIVE ]</a>
+
+    <script>
+        const video = document.getElementById('bg-video');
+        const trigger = document.getElementById('audio-trigger');
+
+        function enableAudio() {
+            video.muted = false;
+            video.play();
+            trigger.style.opacity = '0';
+            setTimeout(() => trigger.style.display = 'none', 1000);
+        }
+    </script>
 
 </body>
 </html>
