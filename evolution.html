@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Law - The Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; font-family: 'Roboto Mono', monospace; }
+        .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
+        #bg-video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.1); }
+        .vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%); z-index: 1; pointer-events: none; }
+        
+        /* Transition UI */
+        .bottom-tab {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 140px;
+            display: flex; justify-content: center; align-items: center;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05); z-index: 10;
+        }
+        .next-chapter-btn {
+            padding: 18px 60px; font-size: 0.85rem; color: rgba(255,255,255,0.7);
+            background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            text-transform: uppercase; letter-spacing: 6px; cursor: pointer; transition: 0.5s;
+        }
+        .next-chapter-btn:hover { color: #fff; border-color: #fff; letter-spacing: 9px; }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- THE RUNNING VIDEO ASSET -->
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="![](https://drzuelosizfllruocmly.supabase.co/storage/v1/object/public/videos/sora/video_6986f09fdf608198863956f5dbbb634a0d7b9c31b8fee7e2.mp4?)" type="video/mp4">
+        </video>
+        <div class="vignette"></div>
+    </div>
 
+    <div class="bottom-tab">
+        <button class="next-chapter-btn" id="toRegistry">Continue to Chicago</button>
+    </div>
+
+    <script>
+        document.getElementById('toRegistry').addEventListener('click', function() {
+            // This will eventually link to the 1950s Chicago page we are about to build
+            console.log("Advancing to 1955 Chicago...");
+        });
+    </script>
+</body>
+</html>
