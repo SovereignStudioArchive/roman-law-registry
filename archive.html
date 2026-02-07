@@ -1,112 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROMAN LAW | THE REGISTRY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <title>ROMAN LAW | REGISTRY</title>
     <style>
-        body { margin: 0; background: #050505; font-family: 'Courier New', monospace; color: #fff; padding: 40px 20px; }
-        .dossier { max-width: 850px; margin: 0 auto; border: 1px solid #1a1a1a; background: #000; padding: 50px; position: relative; }
-
-        /* MAGISTRATE HEADER - THE SEAL */
-        .magistrate-seal { 
-            display: flex; align-items: center; gap: 35px; 
-            border-bottom: 3px solid #b7410e; padding-bottom: 40px; margin-bottom: 60px; 
-        }
+        body { background: #000; color: #fff; font-family: monospace; padding: 50px; }
+        .registry-container { max-width: 800px; margin: 0 auto; border-top: 5px solid #b7410e; padding-top: 30px; }
         
-        /* Explicitly sizing the image container to ensure visibility */
-        .seal-img-wrapper {
-            width: 150px; height: 150px; 
-            border: 2px solid #b7410e; border-radius: 50%; 
-            overflow: hidden; flex-shrink: 0;
-            background: #111; /* Fallback color */
+        /* THE IMAGE BLOCK - BRUTE FORCE */
+        .magistrate-photo {
+            display: block;
+            margin-bottom: 30px;
+            border: 2px solid #b7410e;
+            width: 200px; /* Fixed Width */
+            height: auto;
         }
-        .seal-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        .header-titles h2 { font-family: 'Special Elite', cursive; letter-spacing: 10px; margin: 0; font-size: 2.2rem; color: #fff; text-transform: uppercase; }
-        .header-titles p { color: #b7410e; font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; }
-
-        /* REGISTRY DATA */
-        .registry-label { color: #333; font-size: 0.6rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 25px; display: block; }
+        h1 { font-size: 2.5rem; letter-spacing: 10px; color: #fff; margin: 0; }
+        .sub { color: #b7410e; letter-spacing: 5px; margin-bottom: 50px; display: block; }
         
-        .entry { margin-bottom: 50px; display: flex; gap: 30px; align-items: flex-start; }
-        .entry-content { flex: 1; border-left: 1px solid #222; padding-left: 25px; }
+        .entry { margin-bottom: 40px; border-left: 2px solid #222; padding-left: 20px; }
+        .entry-h { font-size: 1.2rem; color: #b7410e; letter-spacing: 3px; display: block; margin-bottom: 5px; }
+        .entry-p { color: #888; font-size: 0.9rem; line-height: 1.5; }
         
-        .entry-title { font-size: 1.1rem; letter-spacing: 4px; color: #fff; margin-bottom: 10px; display: block; }
-        .entry-desc { color: #888; font-size: 0.85rem; line-height: 1.7; margin-bottom: 15px; }
-        .entry-meta { display: flex; gap: 20px; font-size: 0.65rem; letter-spacing: 3px; color: #b7410e; text-transform: uppercase; }
-
-        .back-btn { margin-top: 50px; display: inline-block; color: #444; text-decoration: none; font-size: 0.75rem; letter-spacing: 5px; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .back-btn:hover { color: #fff; border-bottom-color: #fff; }
-
-        @media (max-width: 600px) { 
-            .magistrate-seal { flex-direction: column; text-align: center; } 
-            .entry { flex-direction: column; }
-            .header-titles h2 { font-size: 1.6rem; }
-        }
+        .back { margin-top: 50px; display: block; color: #555; text-decoration: none; border: 1px solid #333; width: fit-content; padding: 10px 20px; }
     </style>
 </head>
 <body>
 
-    <div class="dossier">
-        <!-- THE SEAL OF THE MAGISTRATE -->
-        <div class="magistrate-seal">
-            <div class="seal-img-wrapper">
-                <!-- Using the Original IMAGINX Roman (Graduation Asset) -->
-                <img src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001682594_1769965690.jpg)" alt="Roman Law Magistrate">
-            </div>
-            <div class="header-titles">
-                <h2>THE REGISTRY</h2>
-                <p>SOVEREIGN EVIDENCE // EST. 2024</p>
-            </div>
-        </div>
+    <div class="registry-container">
+        
+        <!-- THE MAGISTRATE: ORIGINAL IMAGINX ASSET -->
+        <img src="![](https://d15temsujkch0.cloudfront.net/ACP/output_images/job_1001682594_1769965690.jpg)" alt="THE MAGISTRATE" class="magistrate-photo">
 
-        <span class="registry-label">[ CORE_ASSETS ]</span>
+        <h1>THE REGISTRY</h1>
+        <span class="sub">SOVEREIGN EVIDENCE // EST. 2024</span>
 
         <div class="entry">
-            <div class="entry-content">
-                <span class="entry-title">01. VIRTUAL PROTOCOL</span>
-                <p class="entry-desc">The primary infrastructure for AI-agent capital formation. The Roman Law Forge is built upon this immutable bedrock.</p>
-                <div class="entry-meta"><span>TYPE: INFRASTRUCTURE</span><span>STRENGTH: ABSOLUTE</span></div>
-            </div>
+            <span class="entry-h">01. VIRTUAL PROTOCOL</span>
+            <p class="entry-p">Core infrastructure for the Roman Law Forge.</p>
         </div>
 
         <div class="entry">
-            <div class="entry-content">
-                <span class="entry-title">02. AIXBT INTELLIGENCE</span>
-                <p class="entry-desc">Real-time narrative velocity extraction. We monitor the movement of the digital empire through the eyes of the AIXBT network.</p>
-                <div class="entry-meta"><span>TYPE: INTELLIGENCE</span><span>STRENGTH: ACTIVE</span></div>
-            </div>
+            <span class="entry-h">02. AIXBT INTELLIGENCE</span>
+            <p class="entry-p">Real-time narrative velocity and social alpha extraction.</p>
         </div>
 
         <div class="entry">
-            <div class="entry-content">
-                <span class="entry-title">03. LUNA ORCHESTRATION</span>
-                <p class="entry-desc">The orchestration layer for narrative campaigns. Luna ensures the Magistrate's decrees are synchronized across the multiverse.</p>
-                <div class="entry-meta"><span>TYPE: ORCHESTRATION</span><span>STRENGTH: OPERATIONAL</span></div>
-            </div>
-        </div>
-
-        <span class="registry-label">[ MYSTERY_LOGS ]</span>
-
-        <div class="entry">
-            <div class="entry-content">
-                <span class="entry-title">X. DAYDREAMS ($DREAMS)</span>
-                <p class="entry-desc">A deep-tier mystery asset identified by narrative velocity. Monitoring for studio-wide implementation.</p>
-                <div class="entry-meta"><span>TYPE: EMERGING</span><span>STRENGTH: HIGH</span></div>
-            </div>
+            <span class="entry-h">03. LUNA ORCHESTRATION</span>
+            <p class="entry-p">Narrative campaign management and lore synchronization.</p>
         </div>
 
         <div class="entry">
-            <div class="entry-content">
-                <span class="entry-title">Y. FRIEND.TECH ($FRIEND)</span>
-                <p class="entry-desc">The convergence of social-fi and personal capital. Analyzing the intersection of community-driven lore.</p>
-                <div class="entry-meta"><span>TYPE: SOCIAL-FI</span><span>STRENGTH: VOLATILE</span></div>
-            </div>
+            <span class="entry-h">X. DAYDREAMS & FRIEND</span>
+            <p class="entry-p">Mystery Assets A & B: Emerging potential and social-fi velocity.</p>
         </div>
 
-        <a href="index.html" class="back-btn">[ RETURN_TO_HUB ]</a>
+        <a href="index.html" class="back">[ RETURN TO HUB ]</a>
     </div>
 
 </body>
