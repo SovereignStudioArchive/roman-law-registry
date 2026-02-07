@@ -2,33 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Roman Law - Genesis</title>
+    <title>Roman Law - Genesis Diagnostic</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #1a1a1a; }
-        #video-bg {
-            position: fixed; top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            z-index: -100; transform: translateX(-50%) translateY(-50%);
-            background-size: cover;
-        }
-        .ui { position: fixed; bottom: 50px; width: 100%; text-align: center; z-index: 100; }
-        button { background: rgba(0,0,0,0.8); color: white; border: 1px solid white; padding: 15px 30px; cursor: pointer; letter-spacing: 3px; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; font-family: monospace; }
+        #video-bg { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: -1; }
+        #status-log { position: fixed; top: 10px; left: 10px; color: #00ff00; font-size: 10px; z-index: 100; background: rgba(0,0,0,0.7); padding: 10px; pointer-events: none; }
+        .ui { position: fixed; bottom: 50px; width: 100%; text-align: center; z-index: 10; }
+        button { background: none; border: 1px solid white; color: white; padding: 15px 30px; cursor: pointer; text-transform: uppercase; letter-spacing: 5px; }
     </style>
 </head>
 <body>
 
+    <div id="status-log">SYSTEM LOG:<br>Waiting for Magistrate...</div>
+
     <video id="video-bg" autoplay muted loop playsinline>
+        <!-- Ensure this filename matches EXACTLY with capitals/lowercase in GitHub -->
         <source src="assets/britishroman.mp4" type="video/mp4">
-        <!-- If the path above is wrong, the text below will show -->
-        Video Asset Not Found in /assets/
     </video>
 
     <div class="ui">
-        <button onclick="window.location.href='evolution.html'">PROCEED</button>
-        <br><br>
-        <button onclick="document.getElementById('video-bg').play()" style="font-size: 10px; opacity: 0.5;">FORCE VIDEO START</button>
+        <button onclick="window.location.href='evolution.html'">Proceed</button>
     </div>
 
+    <script>
+        const v = document.getElementById('video-bg');
+        const log = document.getElementById('status-log');
+
+        // Check 1: Is the file found?
+        v.addEventListener('error', function() {
+            log.innerHTML += "<br><span style='color:red;'>ERROR: Video asset not found. Check if 'assets/britishroman.mp4' exists and matches case exactly.</span>";
+        });
+
+        // Check 2: Is it loading?
+        v.addEventListener('loadstart', function() {
+            log.innerHTML += "<br>Asset Handshake Initiated...";
+        });
+
+        // Check 3: Is it playing?
+        v.addEventListener('playing', function() {
+            log.innerHTML += "<br>MAGISTRATE VISIBLE. Genesis Protocol Active.";
+            setTimeout(() => { log.style.display = 'none'; }, 3000); // Hide log after success
+        });
+
+        // Force Playback for mobile/stubborn browsers
+        document.body.addEventListener('click', () => { 
+            v.play(); 
+            log.innerHTML += "<br>Manual Force Triggered.";
+        });
+    </script>
 </body>
 </html>
