@@ -12,64 +12,63 @@
             object-fit: cover; z-index: 1; 
         }
 
-        /* THE CONTENT LAYER: Your existing text/data */
+        /* The Ghost Trigger: Invisible layer to unmute audio */
+        #ghost-trigger {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 20; cursor: pointer;
+        }
+
+        /* THE CONTENT LAYER: Floating HUD */
         #content-overlay {
             position: relative; z-index: 10; width: 100%; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
-            background: rgba(0,0,0,0.4); /* Subtle tint to make text pop */
             color: #fff; font-family: 'Courier New', monospace;
             padding: 50px 20px; box-sizing: border-box;
+            pointer-events: none; /* Allows clicks to pass through to the ghost trigger */
         }
 
         .registry-data {
             max-width: 800px; line-height: 1.6; letter-spacing: 2px;
             background: rgba(0,0,0,0.6); padding: 40px; border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px); /* Professional 'Glassmorphism' effect */
+            backdrop-filter: blur(8px); pointer-events: auto; /* Re-enables interaction for text/links */
         }
 
-        /* Back to Genesis Link */
         .back-nav {
-            margin-top: 40px; color: #aaa; text-decoration: none; font-size: 12px;
-            text-transform: uppercase; border: 1px solid #555; padding: 10px 20px;
-        }
-        .back-nav:hover { color: #fff; border-color: #fff; }
-
-        /* The Ghost Trigger for Audio */
-        #audio-trigger {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 20; cursor: pointer;
+            margin-top: 40px; color: #fff; text-decoration: none; font-size: 12px;
+            text-transform: uppercase; border-bottom: 1px solid #fff; padding-bottom: 5px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <!-- Translucent Trigger (Click to hear the Attorney's Decree) -->
-    <div id="audio-trigger" onclick="unmuteForge()"></div>
+    <div id="ghost-trigger" onclick="activateForgeAudio()"></div>
 
-    <video id="bg-dna" loop playsinline muted autoplay>
-        <source src="LAW.mp4" type="video/mp4">
+    <!-- Direct Stream from the Source to bypass GitHub local blocks -->
+    <video id="bg-dna" loop playsinline muted autoplay crossorigin="anonymous">
+        <source src="![](https://drzuelosizfllruocmly.supabase.co/storage/v1/object/public/videos/sora/video_697f12ecf08881918f778c13af80e3930b6654adf7ccc0e3.mp4?)" type="video/mp4">
     </video>
 
     <div id="content-overlay">
         <div class="registry-data">
-            <h1 style="letter-spacing: 10px;">[ THE FORGE ]</h1>
-            <hr style="border: 0; border-top: 1px solid #555; margin: 20px 0;">
+            <h1 style="letter-spacing: 10px; margin-bottom: 0;">[ THE FORGE ]</h1>
+            <p style="font-size: 10px; color: #888; margin-top: 5px;">ESTABLISHED 2026 / ROMAN LAW</p>
+            <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
             
-            <!-- PASTE YOUR EXISTING FORGE CONTENT HERE -->
-            <p>RECRUITMENT STATUS: OPEN</p>
-            <p>CURRENT LIQUIDITY: $VIRTUAL</p>
-            <p>ERA 03: THE ATTORNEY - 2026/LAW</p>
-            <!-- END OF EXISTING CONTENT -->
+            <p><strong>STATUS:</strong> Registry Stabilized</p>
+            <p><strong>MISSION:</strong> Recruit the 3D Vanguard for the $VIRTUAL Era.</p>
+            <p><strong>LEGAL DECREE:</strong> The DNA must scale.</p>
 
+            <br>
             <a href="index.html" class="back-nav">← Return to Genesis</a>
         </div>
     </div>
 
     <script>
-        function unmuteForge() {
+        function activateForgeAudio() {
             const v = document.getElementById('bg-dna');
             v.muted = false;
-            document.getElementById('audio-trigger').style.display = 'none';
+            document.getElementById('ghost-trigger').style.display = 'none';
         }
     </script>
 </body>
