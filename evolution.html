@@ -2,25 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roman Law - Evolution</title>
+    <title>Sovereigne Studios | Evolution</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
-        .video-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        .ui-tab { position: fixed; bottom: 0; width: 100%; height: 120px; display: flex; justify-content: center; align-items: center; z-index: 10; background: rgba(0,0,0,0.5); }
-        button { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px 40px; text-transform: uppercase; letter-spacing: 5px; cursor: pointer; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .evolution-gate { 
+            position: relative; z-index: 10; padding: 25px 50px; 
+            border: 2px solid #fff; color: #fff; background: rgba(0,0,0,0.8);
+            font-family: monospace; font-size: 1.2rem; cursor: pointer;
+            letter-spacing: 8px; text-transform: uppercase; transition: 0.3s;
+        }
+        .evolution-gate:hover { background: #fff; color: #000; box-shadow: 0 0 30px rgba(255,255,255,0.4); }
     </style>
 </head>
 <body>
-    <div class="video-wrapper">
-        <video autoplay muted loop playsinline id="v">
-            <!-- ADJUST FILENAME BELOW TO MATCH YOUR RUNNING VIDEO FILE NAME IN THE ASSETS FOLDER -->
-            <source src="assets/trainrun.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div class="ui-tab">
-        <button disabled>Advancing to Chicago...</button>
-    </div>
+
+    <button class="evolution-gate" id="gate" onclick="initiateEvolution()">[ INITIALIZE EVOLUTION ]</button>
+
+    <video id="evolutionVid" loop playsinline muted crossorigin="anonymous">
+        <!-- The Greaser Asset -->
+        <source src="![](https://images.ottowallet.xyz/videos/1769492817510.mp4)" type="video/mp4">
+    </video>
+
+    <script>
+        function initiateEvolution() {
+            const v = document.getElementById('evolutionVid');
+            const b = document.getElementById('gate');
+            
+            // Standard 'Trust' Sequence: Play Muted -> Unmute
+            v.play().then(() => {
+                v.muted = false;
+                b.style.opacity = '0';
+                setTimeout(() => { b.style.display = 'none'; }, 300);
+            }).catch(err => {
+                console.error("Evolution Blocked:", err);
+                // Fallback for strict browsers: stay muted but play
+                v.play();
+                b.innerHTML = "[ DNA LOCKED - CLICK AGAIN ]";
+            });
+        }
+    </script>
 </body>
 </html>
