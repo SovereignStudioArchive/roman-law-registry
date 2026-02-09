@@ -6,23 +6,23 @@
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; }
         video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        .trigger { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.5); color: #fff; cursor: pointer; font-family: monospace; letter-spacing: 5px; }
+        .gate { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); color: #fff; cursor: pointer; font-family: monospace; letter-spacing: 5px; }
     </style>
 </head>
 <body>
-    <div class="trigger" id="ui" onclick="playAsset()">[ INITIALIZE INDEX ]</div>
+    <div class="gate" onclick="reveal()">[ ENTER ]</div>
     
-    <video id="vid" loop playsinline muted>
-        <!-- Pulls directly from your GitHub Repository folder -->
-        <source src="trainrun.mp4" type="video/mp4">
+    <video id="v" loop playsinline muted>
+        <!-- The '?' at the end forces GitHub to serve the freshest version of the asset -->
+        <source src="trainrun.mp4?v=1.1" type="video/mp4">
     </video>
 
     <script>
-        function playAsset() {
-            const v = document.getElementById('vid');
-            v.muted = false;
-            v.play();
-            document.getElementById('ui').style.display = 'none';
+        function reveal() {
+            const video = document.getElementById('v');
+            video.muted = false;
+            video.play();
+            document.querySelector('.gate').style.display = 'none';
         }
     </script>
 </body>
