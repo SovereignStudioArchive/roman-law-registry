@@ -1,68 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereigne Studios | Index</title>
-    <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
-        
-        /* Full Screen Video Background */
-        .video-background {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1; filter: grayscale(20%) contrast(110%);
-        }
-
-        /* Overlay Styling */
-        .overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; color: #fff; z-index: 1;
-        }
-
-        .enter-btn {
-            padding: 15px 40px; border: 2px solid #fff; background: transparent;
-            color: #fff; font-size: 1.2rem; cursor: pointer; letter-spacing: 5px;
-            transition: 0.3s; text-transform: uppercase;
-        }
-
-        .enter-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.5); }
-
-        .studio-title { margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 10px; opacity: 0.7; }
-    </style>
-</head>
-<body>
-
-    <!-- The Greaser Asset -->
-    <video id="bgVideo" class="video-background" loop playsinline muted>
+<!-- REVISED INDEX CODE -->
+<div id="studio-wrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000;">
+    <!-- Forced Visual Layer -->
+    <video id="greaserVideo" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
         <source src="![](https://images.ottowallet.xyz/videos/1769492817510.mp4)" type="video/mp4">
     </video>
 
-    <!-- The Master Audio -->
-    <audio id="bgAudio" loop>
-        <source src="https://cdn1.suno.ai/4b8bf585-676d-4aa8-8b28-15f05ce6b86a.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="overlay" id="overlay">
-        <div class="studio-title">SOVEREIGNE STUDIOS PRESENT</div>
-        <button class="enter-btn" onclick="startExperience()">Enter The Index</button>
+    <!-- Interactive Audio Trigger (Overcomes Black Screen) -->
+    <div id="audio-shield" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; z-index: 10;">
+        <button onclick="activateStudio()" style="background: transparent; border: 1px solid #fff; color: #fff; padding: 20px; cursor: pointer; letter-spacing: 5px;">ACTIVATE INDEX AUDIO</button>
     </div>
 
-    <script>
-        function startExperience() {
-            const video = document.getElementById('bgVideo');
-            const audio = document.getElementById('bgAudio');
-            const overlay = document.getElementById('overlay');
+    <audio id="masterAudio" loop>
+        <source src="https://cdn1.suno.ai/4b8bf585-676d-4aa8-8b28-15f05ce6b86a.mp3" type="audio/mpeg">
+    </audio>
+</div>
 
-            // Unmute and play both
-            video.muted = false;
-            video.play();
-            audio.play();
-
-            // Fade out overlay
-            overlay.style.opacity = '0';
-            setTimeout(() => { overlay.style.display = 'none'; }, 500);
-        }
-    </script>
-</body>
-</html>
+<script>
+function activateStudio() {
+    const v = document.getElementById('greaserVideo');
+    const a = document.getElementById('masterAudio');
+    v.muted = false; // Unmutes the video
+    a.play();        // Plays the separate track
+    document.getElementById('audio-shield').style.display = 'none';
+}
+</script>
