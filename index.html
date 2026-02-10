@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROMAN LAW STUDIOS | THE REGISTRY</title>
+    <title>ROMAN LAW STUDIOS</title>
     <style>
         body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; background-color: black; overflow: hidden; font-family: 'Courier New', monospace; color: white; }
         
-        /* VIDEO LAYER */
         #bg-video {
             position: fixed; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
@@ -16,68 +15,60 @@
             filter: brightness(45%); display: block;
         }
 
-        /* UI OVERLAY */
-        #overlay { position: relative; z-index: 10; padding: 40px; pointer-events: none; }
-        h1 { font-size: 2rem; letter-spacing: 10px; border-bottom: 2px solid white; display: inline-block; padding-bottom: 10px; margin: 0; }
+        #overlay { position: relative; z-index: 10; padding: 30px; pointer-events: none; }
+        h1 { font-size: 1.8rem; letter-spacing: 8px; border-bottom: 2px solid white; display: inline-block; padding-bottom: 8px; margin: 0; }
         
-        #agent-card { background: rgba(0,0,0,0.8); padding: 25px; border-left: 3px solid white; max-width: 400px; margin-top: 30px; pointer-events: auto; }
-        h2 { letter-spacing: 4px; color: #fff; margin-top: 0; }
-        p { line-height: 1.6; color: #ccc; font-size: 0.9rem; }
+        #agent-card { background: rgba(0,0,0,0.7); padding: 15px; border-left: 2px solid white; max-width: 350px; margin-top: 20px; pointer-events: auto; }
+        h2 { letter-spacing: 3px; font-size: 1.1rem; margin-top: 0; }
+        p { line-height: 1.4; color: #ccc; font-size: 0.85rem; }
 
-        /* CONTROL TERMINAL */
-        #controls { position: fixed; bottom: 8%; left: 40px; display: flex; flex-direction: column; gap: 12px; z-index: 20; }
-        button { background: rgba(0,0,0,0.6); border: 1px solid white; color: white; padding: 15px; width: 260px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; transition: 0.3s; text-align: left; }
-        button:hover, .active-btn { background: white; color: black; padding-left: 30px; }
+        #controls { position: fixed; bottom: 5%; left: 30px; display: flex; flex-direction: column; gap: 8px; z-index: 20; }
+        button { background: rgba(0,0,0,0.6); border: 1px solid white; color: white; padding: 12px; width: 220px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; font-size: 0.75rem; transition: 0.3s; }
+        button:hover, .active-btn { background: white; color: black; }
+
+        /* MOBILE OPTIMIZATION: Shrinks the UI when on a phone */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.2rem; letter-spacing: 4px; }
+            #agent-card { max-width: 80%; padding: 10px; margin-top: 15px; }
+            #agent-card p { font-size: 0.75rem; }
+            #controls { bottom: 3%; left: 20px; gap: 6px; }
+            button { width: 180px; padding: 10px; font-size: 0.7rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- THE ENGINE -->
     <video id="bg-video" autoplay muted loop playsinline preload="auto">
         <source id="video-source" src="britishroman.mp4" type="video/mp4">
     </video>
 
-    <!-- THE INTERFACE -->
     <div id="overlay">
         <h1>ROMAN LAW STUDIOS</h1>
         <div id="agent-card">
             <h2 id="agent-name">001_THE SPY</h2>
-            <p id="agent-desc">DNA: BRITISH INTEL<br>STATUS: ACTIVE / MONITORING<br><br>Primary reconnaissance and alpha generation unit.</p>
+            <p id="agent-desc">DNA: BRITISH INTEL<br>STATUS: ACTIVE / MONITORING</p>
         </div>
     </div>
 
-    <!-- THE AGENT SELECTOR -->
     <div id="controls">
-        <button onclick="switchDNA('britishroman', '001_THE SPY', 'DNA: BRITISH INTEL<br>STATUS: ACTIVE / MONITORING<br><br>Primary reconnaissance and alpha generation unit.', this)" class="active-btn">001_RECON</button>
-        <button onclick="switchDNA('greaser', '002_THE GREASER', 'DNA: URBAN STREETS<br>STATUS: ACTIVE / SECURED<br><br>Internal security and protocol enforcement specialist.', this)">002_SECURITY</button>
-        <button onclick="switchDNA('attorney', '003_THE ATTORNEY', 'DNA: CORPORATE LAW<br>STATUS: ACTIVE / GOVERNING<br><br>High-level protocol governance and strategic negotiation.', this)">003_GOVERNANCE</button>
+        <button onclick="switchDNA('britishroman', '001_THE SPY', 'DNA: BRITISH INTEL<br>STATUS: ACTIVE', this)" class="active-btn">001_RECON</button>
+        <button onclick="switchDNA('greaser', '002_THE GREASER', 'DNA: URBAN STREETS<br>STATUS: ACTIVE', this)">002_SECURITY</button>
+        <button onclick="switchDNA('attorney', '003_THE ATTORNEY', 'DNA: CORPORATE LAW<br>STATUS: ACTIVE', this)">003_GOVERNANCE</button>
     </div>
 
     <script>
         function switchDNA(file, name, desc, btn) {
             const video = document.getElementById('bg-video');
-            const nameField = document.getElementById('agent-name');
-            const descField = document.getElementById('agent-desc');
-            const buttons = document.querySelectorAll('button');
-
-            // 1. Point to the file
             video.src = file + ".mp4";
-            nameField.innerText = name;
-            descField.innerHTML = desc;
-
-            // 2. The Audio Handshake (Unmute on change)
+            document.getElementById('agent-name').innerText = name;
+            document.getElementById('agent-desc').innerHTML = desc;
             video.muted = false;
-            video.volume = 0.8;
-            
             video.load();
-            video.play().catch(e => console.log("Awaiting user interaction for audio..."));
-
-            // 3. UI Update
-            buttons.forEach(b => b.classList.remove('active-btn'));
+            video.play();
+            document.querySelectorAll('button').forEach(b => b.classList.remove('active-btn'));
             btn.classList.add('active-btn');
         }
 
-        // INITIAL WAKE-UP: First tap anywhere on the screen unmutes and plays
         document.addEventListener('click', function() {
             const v = document.getElementById('bg-video');
             v.muted = false;
