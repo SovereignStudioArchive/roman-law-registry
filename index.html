@@ -8,97 +8,66 @@
         body, html { 
             margin: 0; padding: 0; width: 100vw; height: 100vh; 
             background-color: black; overflow: hidden; 
-            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; /* Indicates the screen is interactive */
         }
-
-        /* THE CINEMATIC VIDEO */
+        
         #intro-video { 
             position: fixed; top: 50%; left: 50%; 
             min-width: 100%; min-height: 100%; 
             transform: translate(-50%, -50%); 
             z-index: 1; object-fit: cover; 
-            opacity: 0;
-            transition: opacity 1.5s ease-in;
         }
 
-        /* THE CINEMATIC OVERLAY */
-        #theatre-gate {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; display: flex; align-items: center; justify-content: center;
-            background: black; cursor: pointer; transition: opacity 1s ease-out;
-        }
-
-        /* MINIMALIST CENTER BUTTON */
-        #enter-icon {
-            width: 80px; height: 80px;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.5s ease;
-        }
-
-        #enter-icon::after {
-            content: '';
-            width: 0; height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 15px solid white;
-            margin-left: 5px;
-        }
-
-        #enter-icon:hover {
-            border-color: white;
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
-
-        #skip-sequence {
-            position: fixed; bottom: 30px; right: 30px;
+        /* Subtle indicator that sound is muted until click */
+        #audio-hint {
+            position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%);
             z-index: 50; font-family: 'Times New Roman', serif;
-            font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.2);
-            cursor: pointer; text-transform: uppercase;
+            font-size: 10px; letter-spacing: 4px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            pointer-events: none;
+            transition: opacity 1s;
         }
     </style>
 </head>
-<body>
+<body onclick="igniteAudio()">
 
-    <!-- THE THEATRE GATE -->
-    <div id="theatre-gate" onclick="igniteCinema()">
-        <div id="enter-icon"></div>
-    </div>
+    <!-- OPTIONAL: Very faint hint that disappears on click -->
+    <div id="audio-hint">CLICK TO ACTIVATE AUDIO</div>
 
-    <!-- THE CINEMATIC -->
-    <video id="intro-video" playsinline preload="auto">
+    <!-- THE CINEMATIC (Autoplays muted to bypass browser blocks) -->
+    <video id="intro-video" autoplay playsinline muted preload="auto">
         <source src="romansprint.mp4" type="video/mp4">
     </video>
 
-    <div id="skip-sequence" onclick="enterStudio()">SKIP</div>
-
     <script>
         const video = document.getElementById('intro-video');
-        const gate = document.getElementById('theatre-gate');
+        const hint = document.getElementById('audio-hint');
 
-        function igniteCinema() {
-            // Fade out the gate and show the video
-            gate.style.opacity = '0';
-            video.style.opacity = '1';
-            
-            setTimeout(() => { gate.style.display = 'none'; }, 1000);
-
-            // Play with full audio
+        function igniteAudio() {
+            // Wake up the sound
             video.muted = false;
-            video.play().catch(e => {
-                console.log("Audio handshake required.");
-                enterStudio();
-            });
+            
+            // Fade out the hint
+            if(hint) hint.style.opacity = '0';
+            
+            console.log("Audio Unlocked.");
         }
 
         function enterStudio() {
             window.location.href = "studio.html";
         }
 
-        video.onended = enterStudio;
-        video.onerror = enterStudio;
+        // Move to the Studio when the sprint concludes
+        video.onended = function() {
+            enterStudio();
+        };
+
+        // Failsafe: If video breaks, go to Studio
+        video.onerror = function() {
+            enterStudio();
+        };
     </script>
 </body>
 </html>
