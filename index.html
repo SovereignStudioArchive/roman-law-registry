@@ -3,62 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROMAN LAW STUDIOS | THE FORGE</title>
+    <title>ROMAN LAW STUDIOS</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; background-color: black; overflow: hidden; font-family: 'Courier New', monospace; color: white; }
-        #intro-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: 1; object-fit: cover; }
-        #launch-gate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; display: flex; align-items: center; justify-content: center; background: black; cursor: pointer; }
-        #gate-text { border: 1px solid white; padding: 25px; letter-spacing: 5px; text-transform: uppercase; }
-        #status-report { position: fixed; top: 10px; left: 10px; font-size: 10px; color: #444; z-index: 200; }
-        #skip-trigger { position: fixed; bottom: 30px; right: 30px; z-index: 150; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3); cursor: pointer; text-decoration: underline; }
+        body, html { 
+            margin: 0; padding: 0; width: 100vw; height: 100vh; 
+            background-color: black; overflow: hidden; 
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* THE CINEMATIC VIDEO */
+        #intro-video { 
+            position: fixed; top: 50%; left: 50%; 
+            min-width: 100%; min-height: 100%; 
+            transform: translate(-50%, -50%); 
+            z-index: 1; object-fit: cover; 
+            opacity: 0;
+            transition: opacity 1.5s ease-in;
+        }
+
+        /* THE CINEMATIC OVERLAY */
+        #theatre-gate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            background: black; cursor: pointer; transition: opacity 1s ease-out;
+        }
+
+        /* MINIMALIST CENTER BUTTON */
+        #enter-icon {
+            width: 80px; height: 80px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        #enter-icon::after {
+            content: '';
+            width: 0; height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid white;
+            margin-left: 5px;
+        }
+
+        #enter-icon:hover {
+            border-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        #skip-sequence {
+            position: fixed; bottom: 30px; right: 30px;
+            z-index: 50; font-family: 'Times New Roman', serif;
+            font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.2);
+            cursor: pointer; text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
-    <div id="status-report">SYSTEM READY_</div>
-
-    <div id="launch-gate" onclick="igniteForge()">
-        <div id="gate-text">INITIALIZE SYSTEM_</div>
+    <!-- THE THEATRE GATE -->
+    <div id="theatre-gate" onclick="igniteCinema()">
+        <div id="enter-icon"></div>
     </div>
 
-    <div id="skip-trigger" onclick="enterRegistry()">SKIP_SEQUENCE_</div>
-
+    <!-- THE CINEMATIC -->
     <video id="intro-video" playsinline preload="auto">
         <source src="romansprint.mp4" type="video/mp4">
     </video>
 
+    <div id="skip-sequence" onclick="enterStudio()">SKIP</div>
+
     <script>
         const video = document.getElementById('intro-video');
-        const gate = document.getElementById('launch-gate');
-        const status = document.getElementById('status-report');
+        const gate = document.getElementById('theatre-gate');
 
-        function igniteForge() {
-            status.innerText = "IGNITION SEQUENCE STARTED...";
+        function igniteCinema() {
+            // Fade out the gate and show the video
             gate.style.opacity = '0';
-            setTimeout(() => { gate.style.display = 'none'; }, 500);
+            video.style.opacity = '1';
             
+            setTimeout(() => { gate.style.display = 'none'; }, 1000);
+
+            // Play with full audio
             video.muted = false;
-            video.play().then(() => {
-                status.innerText = "TRANSMISSION LIVE_";
-            }).catch(e => {
-                status.innerText = "HANDSHAKE ERROR - REDIRECTING...";
-                enterRegistry();
+            video.play().catch(e => {
+                console.log("Audio handshake required.");
+                enterStudio();
             });
         }
 
-        // THE CRITICAL REDIRECT: Sending user to studio.html
-        function enterRegistry() {
+        function enterStudio() {
             window.location.href = "studio.html";
         }
 
-        video.onended = function() {
-            enterRegistry();
-        };
-
-        video.onerror = function() {
-            status.innerText = "ASSET MISSING - ENTERING STUDIO_";
-            setTimeout(enterRegistry, 1000);
-        };
+        video.onended = enterStudio;
+        video.onerror = enterStudio;
     </script>
 </body>
 </html>
