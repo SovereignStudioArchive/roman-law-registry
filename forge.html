@@ -2,74 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sovereigne Studios | The Forge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN LAW STUDIOS | THE FORGE</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow-x: hidden; }
+        body, html { 
+            margin: 0; padding: 0; width: 100vw; height: 100vh; 
+            background-color: black; overflow: hidden; 
+            font-family: 'Courier New', monospace; color: white; 
+        }
         
-        /* THE ASSET: The Attorney (LAW.mp4) */
-        video#bg-dna { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            object-fit: cover; z-index: 1; 
+        #intro-video {
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1; object-fit: cover;
         }
 
-        /* The Ghost Trigger: Invisible layer to unmute audio */
-        #ghost-trigger {
+        /* INITIAL OVERLAY: Instruction to unlock sound */
+        #launch-gate {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 20; cursor: pointer;
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.8); cursor: pointer;
+            transition: opacity 0.5s;
         }
 
-        /* THE CONTENT LAYER: Floating HUD */
-        #content-overlay {
-            position: relative; z-index: 10; width: 100%; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            color: #fff; font-family: 'Courier New', monospace;
-            padding: 50px 20px; box-sizing: border-box;
-            pointer-events: none; /* Allows clicks to pass through to the ghost trigger */
+        #gate-text {
+            border: 1px solid white; padding: 20px 40px;
+            letter-spacing: 5px; text-transform: uppercase;
+            font-weight: bold; background: rgba(255,255,255,0.1);
         }
 
-        .registry-data {
-            max-width: 800px; line-height: 1.6; letter-spacing: 2px;
-            background: rgba(0,0,0,0.6); padding: 40px; border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px); pointer-events: auto; /* Re-enables interaction for text/links */
-        }
-
-        .back-nav {
-            margin-top: 40px; color: #fff; text-decoration: none; font-size: 12px;
-            text-transform: uppercase; border-bottom: 1px solid #fff; padding-bottom: 5px;
-            display: inline-block;
+        #skip-button {
+            position: fixed; bottom: 30px; right: 30px;
+            z-index: 50; font-size: 0.7rem; letter-spacing: 2px;
+            color: rgba(255,255,255,0.4); cursor: pointer;
+            text-decoration: underline; text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <div id="ghost-trigger" onclick="activateForgeAudio()"></div>
-
-    <!-- Direct Stream from the Source to bypass GitHub local blocks -->
-    <video id="bg-dna" loop playsinline muted autoplay crossorigin="anonymous">
-        <source src="![](LAW.mp4)" type="video/mp4">
-    </video>
-
-    <div id="content-overlay">
-        <div class="registry-data">
-            <h1 style="letter-spacing: 10px; margin-bottom: 0;">[ THE FORGE ]</h1>
-            <p style="font-size: 10px; color: #888; margin-top: 5px;">ESTABLISHED 2026 / ROMAN LAW</p>
-            <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
-            
-            <p><strong>STATUS:</strong> Registry Stabilized</p>
-            <p><strong>MISSION:</strong> Recruit the 3D Vanguard for the $VIRTUAL Era.</p>
-            <p><strong>LEGAL DECREE:</strong> The DNA must scale.</p>
-
-            <br>
-            <a href="index.html" class="back-nav">← Return to Genesis</a>
-        </div>
+    <!-- THE GATEKEEPER: Forces a click to ensure the browser allows audio -->
+    <div id="launch-gate" onclick="igniteForge()">
+        <div id="gate-text">INITIALIZE SYSTEM_</div>
     </div>
 
+    <!-- THE CINEMATIC -->
+    <video id="intro-video" playsinline preload="auto">
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+
+    <div id="skip-button" onclick="enterRegistry()">SKIP_SEQUENCE</div>
+
     <script>
-        function activateForgeAudio() {
-            const v = document.getElementById('bg-dna');
-            v.muted = false;
-            document.getElementById('ghost-trigger').style.display = 'none';
+        const video = document.getElementById('intro-video');
+        const gate = document.getElementById('launch-gate');
+
+        function igniteForge() {
+            // 1. Hide the gate
+            gate.style.opacity = '0';
+            setTimeout(() => { gate.style.display = 'none'; }, 500);
+
+            // 2. Start Video with Audio enabled
+            video.muted = false;
+            video.play();
         }
+
+        // REDIRECT PROTOCOL: When video ends, move to the main Studio
+        video.onended = function() {
+            enterRegistry();
+        };
+
+        function enterRegistry() {
+            window.location.href = "index.html";
+        }
+
+        // FAILSAFE: If video doesn't load or is missing, redirect after 3 seconds
+        video.onerror = function() {
+            console.log("Intro asset not found. Entering Registry.");
+            enterRegistry();
+        };
     </script>
 </body>
 </html>
