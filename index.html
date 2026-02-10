@@ -139,30 +139,43 @@
     </div>
 
     <script>
-        function switchAgent(videoFile, name, desc, btn) {
-            const video = document.getElementById('bg-video');
-            const source = document.getElementById('video-source');
-            const nameField = document.getElementById('agent-name');
-            const descField = document.getElementById('agent-desc');
-            const buttons = document.querySelectorAll('button');
-
-            video.style.opacity = 0;
-
-            setTimeout(() => {
-                // Pointing to the file + .mp4
-                source.src = videoFile + ".mp4";
-                nameField.innerHTML = name;
-                descField.innerHTML = desc;
-
-                video.load();
-                video.play().then(() => {
-                    video.style.opacity = 1;
-                });
-
-                buttons.forEach(b => b.classList.remove('active-btn'));
-                btn.classList.add('active-btn');
-            }, 500);
+    // This function forces the video to wake up on the first click anywhere on the page
+    document.body.addEventListener('click', function() {
+        const video = document.getElementById('bg-video');
+        if (video.paused) {
+            video.play();
         }
-    </script>
+    }, { once: true });
+
+    function switchAgent(videoFile, name, desc, btn) {
+        const video = document.getElementById('bg-video');
+        const source = document.getElementById('video-source');
+        const nameField = document.getElementById('agent-name');
+        const descField = document.getElementById('agent-desc');
+        const buttons = document.querySelectorAll('button');
+
+        video.style.opacity = 0;
+
+        setTimeout(() => {
+            // We use the full URL to ensure no pathing errors
+            source.src = "https://romanlaw.studio/" + videoFile + ".mp4";
+            nameField.innerHTML = name;
+            descField.innerHTML = desc;
+
+            video.load();
+            
+            // Force play and then fade back in
+            video.play().then(() => {
+                video.style.opacity = 1;
+            }).catch(e => {
+                console.log("Playback failed, waiting for click...");
+                video.style.opacity = 1; 
+            });
+
+            buttons.forEach(b => b.classList.remove('active-btn'));
+            btn.classList.add('active-btn');
+        }, 500);
+    }
+</script>
 </body>
 </html>
