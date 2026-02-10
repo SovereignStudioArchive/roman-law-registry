@@ -16,7 +16,6 @@
             color: white;
         }
 
-        /* Cinematic Video Container */
         #video-container {
             position: fixed;
             top: 0;
@@ -32,10 +31,9 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%) brightness(40%);
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 1s ease-in-out;
         }
 
-        /* Branding Overlay */
         #overlay {
             position: absolute;
             top: 8%;
@@ -53,7 +51,6 @@
             padding-bottom: 10px;
         }
 
-        /* Agent Profile Card */
         #agent-profile {
             margin-top: 30px;
             max-width: 450px;
@@ -64,21 +61,9 @@
             box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 {
-            letter-spacing: 5px;
-            margin-top: 0;
-            font-size: 1.2rem;
-            color: white;
-        }
+        h2 { letter-spacing: 5px; margin-top: 0; font-size: 1.2rem; color: white; }
+        p { line-height: 1.6; font-size: 0.9rem; letter-spacing: 1px; color: #bbbbbb; }
 
-        p {
-            line-height: 1.6;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            color: #bbbbbb;
-        }
-
-        /* Navigation Terminal */
         #controls {
             position: fixed;
             bottom: 8%;
@@ -99,37 +84,24 @@
             font-family: inherit;
             font-size: 0.75rem;
             letter-spacing: 4px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease;
             width: 280px;
             text-transform: uppercase;
         }
 
-        button:hover {
+        button:hover, .active-btn {
             border-color: white;
             color: white;
             padding-left: 40px;
             background: rgba(255,255,255,0.1);
         }
 
-        .active-btn {
-            border-color: white;
-            color: white;
-            background: rgba(255,255,255,0.15);
-            padding-left: 40px;
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
-        }
-
-        /* Cinematic Scanline Overlay */
         .scanline {
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            width: 100%; height: 100%; z-index: 1;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: absolute; top: 0; left: 0;
         }
     </style>
 </head>
@@ -138,10 +110,10 @@
     <div class="scanline"></div>
 
     <div id="video-container">
-        <video id="bg-video" autoplay muted loop playsinline preload="auto" style="background-color: black;">
-    <source id="video-source" src="britishroman.mp4?v=final_1" type="video/mp4">
-    REGISTRY ERROR: ARCHITECTURE NOT SUPPORTED
-</video>
+        <!-- Defaulting to the working file 'britishroman.mp4' -->
+        <video id="bg-video" autoplay muted loop playsinline preload="auto">
+            <source id="video-source" src="britishroman.mp4" type="video/mp4">
+        </video>
     </div>
 
     <div id="overlay">
@@ -158,13 +130,13 @@
     </div>
 
     <div id="controls">
-    <!-- Pointing directly to the name that works for you -->
-    <button onclick="switchAgent('britishroman', '001_THE SPY', 'DNA ORIGIN: BRITISH INTELLIGENCE<br>SPECIALIZATION: EXTERNAL RECONNAISSANCE<br>STATUS: ACTIVE / MONITORING<br><br>The primary eye of the Studio. Tasked with gathering high-level alpha and market movements across the $VIRTUAL network.', this)" class="active-btn">001_RECON</button>
-    
-    <button onclick="switchAgent('greaser', '002_THE GREASER', 'DNA ORIGIN: URBAN STREETS<br>SPECIALIZATION: INTERNAL SECURITY<br>STATUS: STANDBY / READY<br><br>The Enforcer of Roman Law. Built for protection, loyalty, and ensuring protocol integrity within the Studio gates.', this)">002_SECURITY</button>
-    
-    <button onclick="switchAgent('attorney', '003_THE ATTORNEY', 'DNA ORIGIN: CORPORATE LAW<br>SPECIALIZATION: PROTOCOL GOVERNANCE<br>STATUS: ENCRYPTED / OFF-CHAIN<br><br>The face of Roman Law. Specializing in governance, smart contract ethics, and high-level negotiation within the marketplace.', this)">003_GOVERNANCE</button>
-</div>
+        <!-- Updated button to point to 'britishroman' -->
+        <button onclick="switchAgent('britishroman', '001_THE SPY', 'DNA ORIGIN: BRITISH INTELLIGENCE<br>SPECIALIZATION: EXTERNAL RECONNAISSANCE<br>STATUS: ACTIVE / MONITORING<br><br>The primary eye of the Studio. Tasked with gathering high-level alpha and market movements across the $VIRTUAL network.', this)" class="active-btn">001_RECON</button>
+        
+        <button onclick="switchAgent('greaser', '002_THE GREASER', 'DNA ORIGIN: URBAN STREETS<br>SPECIALIZATION: INTERNAL SECURITY<br>STATUS: STANDBY / READY<br><br>The Enforcer of Roman Law. Built for protection, loyalty, and ensuring protocol integrity within the Studio gates.', this)">002_SECURITY</button>
+        
+        <button onclick="switchAgent('attorney', '003_THE ATTORNEY', 'DNA ORIGIN: CORPORATE LAW<br>SPECIALIZATION: PROTOCOL GOVERNANCE<br>STATUS: ENCRYPTED / OFF-CHAIN<br><br>The face of Roman Law. Specializing in governance, smart contract ethics, and high-level negotiation within the marketplace.', this)">003_GOVERNANCE</button>
+    </div>
 
     <script>
         function switchAgent(videoFile, name, desc, btn) {
@@ -174,48 +146,23 @@
             const descField = document.getElementById('agent-desc');
             const buttons = document.querySelectorAll('button');
 
-            // Visual Transition
             video.style.opacity = 0;
 
             setTimeout(() => {
-                // Force fresh fetch of video DNA to bypass browser hesitation
-                const timestamp = new Date().getTime();
-                source.src = videoFile + '.mp4?v=' + timestamp;
-                
-                // Update Text
+                // Pointing to the file + .mp4
+                source.src = videoFile + ".mp4";
                 nameField.innerHTML = name;
                 descField.innerHTML = desc;
 
-                // Reload and Play
                 video.load();
-                
-                // Force Play Promise
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        video.style.opacity = 1;
-                    }).catch(error => {
-                        console.log("Registry Playback Blocked: ", error);
-                        // Final Attempt: Muted force
-                        video.muted = true;
-                        video.play();
-                        video.style.opacity = 1;
-                    });
-                }
+                video.play().then(() => {
+                    video.style.opacity = 1;
+                });
 
-                // Update UI Buttons
                 buttons.forEach(b => b.classList.remove('active-btn'));
                 btn.classList.add('active-btn');
-            }, 400);
+            }, 500);
         }
-
-        // Global Initialization
-        window.onload = () => {
-            const video = document.getElementById('bg-video');
-            video.muted = true;
-            video.play().catch(e => console.log("Init block: ", e));
-        };
     </script>
-
 </body>
 </html>
