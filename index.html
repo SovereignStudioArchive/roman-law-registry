@@ -1,30 +1,79 @@
-<script>
-    function switchDNA(file, name, desc, btn) {
-        const video = document.getElementById('bg-video');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN LAW STUDIOS</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; background-color: black; overflow: hidden; font-family: 'Courier New', monospace; color: white; }
         
-        // Update source and metadata
-        video.src = file + ".mp4";
-        document.getElementById('agent-name').innerText = name;
-        document.getElementById('agent-desc').innerHTML = desc;
-        
-        // THE AUDIO FIX: When you click a button, we unmute and set volume
-        video.muted = false;
-        video.volume = 0.7; // 70% volume for a professional feel
-        
-        video.load();
-        video.play().catch(error => {
-            console.log("Audio still blocked by browser. User must click again.");
-        });
+        #bg-video {
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1; object-fit: cover;
+            filter: brightness(50%); display: block;
+        }
 
-        // Update button visual state
-        document.querySelectorAll('button').forEach(b => b.classList.remove('active-btn'));
-        btn.classList.add('active-btn');
-    }
+        #overlay { position: relative; z-index: 10; padding: 40px; pointer-events: none; }
+        h1 { font-size: 2rem; letter-spacing: 10px; border-bottom: 2px solid white; display: inline-block; padding-bottom: 10px; margin: 0; }
+        
+        #agent-card { background: rgba(0,0,0,0.8); padding: 20px; border-left: 3px solid white; max-width: 380px; margin-top: 30px; pointer-events: auto; }
+        
+        #controls { position: fixed; bottom: 8%; left: 40px; display: flex; flex-direction: column; gap: 12px; z-index: 20; }
+        button { background: rgba(0,0,0,0.5); border: 1px solid white; color: white; padding: 15px; width: 240px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; transition: 0.3s; }
+        button:hover, .active-btn { background: white; color: black; }
+    </style>
+</head>
+<body>
 
-    // THE ELAINE FAILSAFE: Unmute the current video on the very first tap anywhere
-    document.addEventListener('click', function() {
-        const video = document.getElementById('bg-video');
-        video.muted = false;
-        video.play();
-    }, { once: true });
-</script>
+    <video id="bg-video" autoplay muted loop playsinline preload="auto">
+        <source id="video-source" src="britishroman.mp4" type="video/mp4">
+    </video>
+
+    <div id="overlay">
+        <h1>ROMAN LAW STUDIOS</h1>
+        <div id="agent-card">
+            <h2 id="agent-name">001_THE SPY</h2>
+            <p id="agent-desc">DNA: BRITISH INTEL<br>STATUS: ACTIVE / MONITORING</p>
+        </div>
+    </div>
+
+    <div id="controls">
+        <button onclick="switchDNA('britishroman', '001_THE SPY', 'DNA: BRITISH INTEL<br>STATUS: ACTIVE', this)" class="active-btn">001_RECON</button>
+        <button onclick="switchDNA('greaser', '002_THE GREASER', 'DNA: URBAN STREETS<br>STATUS: STANDBY', this)">002_SECURITY</button>
+    </div>
+
+    <script>
+        function switchDNA(file, name, desc, btn) {
+            const video = document.getElementById('bg-video');
+            const nameField = document.getElementById('agent-name');
+            const descField = document.getElementById('agent-desc');
+            const buttons = document.querySelectorAll('button');
+
+            // 1. Update Video and Metadata
+            video.src = file + ".mp4";
+            nameField.innerText = name;
+            descField.innerHTML = desc;
+
+            // 2. Unmute and Play (Audio Restoration)
+            video.muted = false;
+            video.volume = 0.8;
+            
+            video.load();
+            video.play();
+
+            // 3. UI Feedback
+            buttons.forEach(b => b.classList.remove('active-btn'));
+            btn.classList.add('active-btn');
+        }
+
+        // AUTO-WAKEUP FOR AUDIO: Clicking anywhere unmutes the current video
+        document.addEventListener('click', function() {
+            const v = document.getElementById('bg-video');
+            v.muted = false;
+            v.play();
+        }, { once: true });
+    </script>
+</body>
+</html>
