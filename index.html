@@ -5,27 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROMAN LAW STUDIOS</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; color: white; font-family: 'Courier New', monospace; }
-        
-        /* THE FIX: We ensure the video is always at 100% opacity and properly layered */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; color: #fff; font-family: 'Courier New', monospace; }
         #video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        video { width: 100%; height: 100%; object-fit: cover; filter: brightness(40%); }
-
+        /* We force the video to be visible and at the correct size */
+        video { min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1 !important; visibility: visible !important; filter: brightness(50%); }
         #overlay { position: absolute; top: 10%; left: 5%; z-index: 10; pointer-events: none; }
-        #agent-profile { margin-top: 20px; max-width: 400px; background: rgba(0,0,0,0.8); padding: 20px; border-left: 2px solid white; pointer-events: auto; }
-        
-        #controls { position: fixed; bottom: 10%; left: 5%; display: flex; flex-direction: column; gap: 10px; z-index: 20; }
-        button { background: rgba(0,0,0,0.6); border: 1px solid white; color: white; padding: 15px; width: 250px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+        #agent-profile { margin-top: 20px; max-width: 400px; background: rgba(0,0,0,0.85); padding: 25px; border-left: 3px solid white; pointer-events: auto; }
+        #controls { position: fixed; bottom: 10%; left: 5%; display: flex; flex-direction: column; gap: 15px; z-index: 20; }
+        button { background: transparent; border: 1px solid white; color: white; padding: 15px; width: 250px; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; transition: 0.3s; }
         button:hover { background: white; color: black; }
     </style>
 </head>
 <body>
 
     <div id="video-container">
-        <!-- THE "ELITE" SOURCE: Using the full absolute URL which we verified works -->
-        <video id="bg-video" autoplay muted loop playsinline preload="auto">
-            <source src="![](https://romanlaw.studio/britishroman.mp4)" type="video/mp4">
-        </video>
+        <!-- We use a hard-coded src attribute instead of a source tag for faster rendering -->
+        <video id="bg-video" autoplay muted loop playsinline src="![](https://romanlaw.studio/britishroman.mp4)"></video>
     </div>
 
     <div id="overlay">
@@ -37,22 +32,26 @@
     </div>
 
     <div id="controls">
-        <button onclick="changeAgent('britishroman', '001_THE SPY', 'DNA ORIGIN: BRITISH INTELLIGENCE<br>STATUS: ACTIVE')">001_RECON</button>
-        <button onclick="changeAgent('greaser', '002_THE GREASER', 'DNA ORIGIN: URBAN STREETS<br>STATUS: STANDBY')">002_SECURITY</button>
+        <button onclick="bootAgent('britishroman', '001_THE SPY')">001_RECON</button>
+        <button onclick="bootAgent('greaser', '002_THE GREASER')">002_SECURITY</button>
     </div>
 
     <script>
-        function changeAgent(file, name, desc) {
+        function bootAgent(file, name) {
             const video = document.getElementById('bg-video');
-            // We force the full URL again on switch
             video.src = "https://romanlaw.studio/" + file + ".mp4";
             document.getElementById('agent-name').innerText = name;
-            document.getElementById('agent-desc').innerHTML = desc;
+            // Force the video to reload the new DNA
+            video.load();
             video.play();
         }
 
-        // AUTO-WAKEUP: This clicks the video "on" the moment the user touches anything
-        document.addEventListener('click', function() {
+        // THE ELAINE FAILSAFE: 
+        // If the video doesn't play on load, this forces it the moment she touches the screen.
+        window.addEventListener('touchstart', function() {
+            document.getElementById('bg-video').play();
+        }, { once: true });
+        window.addEventListener('click', function() {
             document.getElementById('bg-video').play();
         }, { once: true });
     </script>
